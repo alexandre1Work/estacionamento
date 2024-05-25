@@ -36,9 +36,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header"><h3><?php echo $titulo_tabela; ?></h3></div>
+                        <div class="card-header"> <a class="btn btn-success" href="">+Novo</a> </div>
                         <div class="card-body">
-                            <table id="data_table" class="table">
+                            <table class="table data_table">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -46,7 +46,9 @@
                                         <th>E-mail</th>
                                         <th>Nome</th>
                                         <th>Ativo</th>
-                                        <th class="nosort">Ações</th>
+                                        <th class="nosort text-right pr-45">
+                                            <span class="pr-40">Ações</span>
+                                    </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -56,11 +58,14 @@
                                         <td><?php echo $user->username; ?></td>
                                         <td><?php echo $user->email; ?></td>
                                         <td><?php echo $user->first_name; ?></td>
-                                        <td><?php echo $user->active; ?></td>
-                                        <td>
-                                            <a class="btn btn-primary" href="">Editar</a>
-                                            <a class="btn btn-danger" href="">Excluir</a>
-                                        </td>
+                                        <td><?php echo ($user->active == 1 ? '<span class="badge badge-pill badge-success mb-1">Sim</span>' : '<span class="badge badge-pill badge-warning mb-1">Não</span>'); ?></td>
+                                        <td class="text-right">
+                                        <a href="" class="btn btn-primary">
+                                            <i class="ik ik-edit-2"></i>Editar
+                                        </a> 
+                                        <a href="" class="btn btn-danger">
+                                            <i class="ik ik-trash-2"></i>Excluir
+                                        </a> 
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>

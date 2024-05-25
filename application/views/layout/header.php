@@ -31,6 +31,17 @@
         -->
 
         <link rel="stylesheet" href="<?php echo base_url('public/dist/css/theme.min.css'); ?>">
+
+        <?php if(isset($styles)): ?>
+
+            <?php foreach ($styles as $style): ?>
+
+                <link rel="stylesheet" href="<?php echo base_url('public/' . $style); ?>">
+
+            <?php endforeach; ?>
+        
+        <?php endif; ?>
+
     </head>
 
     <body>
