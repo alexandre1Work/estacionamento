@@ -45,6 +45,7 @@
                                         <th>Usuário</th>
                                         <th>E-mail</th>
                                         <th>Nome</th>
+                                        <th>Perfil de Acesso</th>
                                         <th>Ativo</th>
                                         <th class="nosort text-right pr-45">
                                             <span class="pr-40">Ações</span>
@@ -58,12 +59,13 @@
                                         <td><?php echo $user->username; ?></td>
                                         <td><?php echo $user->email; ?></td>
                                         <td><?php echo $user->first_name; ?></td>
+                                        <td><?php echo ($this->ion_auth->is_admin($user->id) ? 'Administrador' : 'Atendente'); ?></td>
                                         <td><?php echo ($user->active == 1 ? '<span class="badge badge-pill badge-success mb-1">Sim</span>' : '<span class="badge badge-pill badge-warning mb-1">Não</span>'); ?></td>
                                         <td class="text-right">
-                                        <a href="" class="btn btn-primary">
+                                    <a data-toggle="tooltip" data-placement="bottom" title="Editar <?php $this->router->fetch_class(); ?>" href="<?php echo base_url('usuarios/core/'.$user->id); ?>" class="btn btn-primary">
                                             <i class="ik ik-edit-2"></i>Editar
                                         </a> 
-                                        <a href="" class="btn btn-danger">
+                                        <a data-toggle="tooltip" data-placement="bottom" title="Excluir <?php $this->router->fetch_class(); ?> " href="" class="btn btn-danger">
                                             <i class="ik ik-trash-2"></i>Excluir
                                         </a> 
                                     </tr>

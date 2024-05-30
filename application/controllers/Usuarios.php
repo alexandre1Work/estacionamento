@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 defined('BASEPATH') OR exit('Ação não permitida');
 
@@ -28,5 +28,48 @@ class Usuarios extends CI_Controller{
         $this->load->view('usuarios/index');
         $this->load->view('layout/footer');
     }
+
+    public function core($usuario_id = NULL) {
+
+        if(!$usuario_id){
+
+            exit('Pode cadastra um novo usuário');
+
+            //cadastro de novo usuário
+
+        }
+        else{
+
+            //Edita o usuário
+
+            if(!$this->ion_auth->user($usuario_id)->row()){
+                exit('Usuário não existe');
+            }
+            else{
+
+                //Editar Usuário
+
+
+            }
+
+        }
+
+
+        $data = array(
+            'titulo' => 'Editar Usuário',
+            'sub_titulo' => 'Chegou a hora de editar o usuário',
+            'icone_view' => 'ik ik-user',
+            'usuarios' => $this->ion_auth->user($usuario_id)->row(), //get all users
+        );
+
+        // echo '<pre>';
+        // print_r ($data['usuarios']);
+        // exit();
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('usuarios/core');
+        $this->load->view('layout/footer');
+    }
+
 
 }
