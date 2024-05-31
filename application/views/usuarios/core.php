@@ -40,33 +40,85 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header"> 
-                            <?php echo(isset($usuarios) ? $usuarios-> data_ultima_alteracao : ''); ?> 
+                            <?php echo(isset($usuarios) ? '<i class="ik ik-calendar ik-1x"></i> &nbsp; Data da última alteração:&nbsp;'.formata_data_banco_com_hora ($usuarios-> data_ultima_alteracao) : ''); ?> 
                         </div>
                         <div class="card-body">
                         
-                            <form class="forms-sample">
-                                <div class="form-group">
-                                    <label for="exampleInputUsername1">Username</label>
-                                    <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Username">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputConfirmPassword1">Confirm Password</label>
-                                    <input type="password" class="form-control" id="exampleInputConfirmPassword1" placeholder="Password">
-                                </div>
-                                <div class="form-group">
-                                    <label class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input">
-                                        <span class="custom-control-label">&nbsp;Remember me</span>
-                                    </label>
-                                </div>
+                            <form class="forms-sample" name="form_core" method="POST">
+
+                                <div class="form-group row">
+                                
+                                    <div class="col-md-6 mb-20">
+                                        <label>Nome</label>
+                                        <input type="text" class="form-control" name="first_name" value="<?php echo(isset($usuarios) ? $usuarios->first_name : set_value('first_name')); ?>">
+                                    </div>
+
+                                    <div class="col-md-6 mb-20">
+                                        <label>Sobrenome</label>
+                                        <input type="text" class="form-control" name="last_name" value="<?php echo(isset($usuarios) ? $usuarios->last_name : set_value('last_name')); ?>">
+                                    </div>
+
+                                </div>   
+
+                                <div class="form-group row">
+                                
+                                    <div class="col-md-6 mb-20">
+                                        <label>Usuário</label>
+                                        <input type="text" class="form-control" name="username" value="<?php echo(isset($usuarios) ? $usuarios->username : set_value('username')); ?>">
+                                    </div>
+
+                                    <div class="col-md-6 mb-20">
+                                        <label>E-mail (Login)</label>
+                                        <input type="text" class="form-control" name="email" value="<?php echo(isset($usuarios) ? $usuarios->email : set_value('email')); ?>">
+                                    </div>
+                                
+                                </div>  
+
+                                <div class="form-group row">
+                                
+                                    <div class="col-md-6 mb-20">
+                                        <label>Senha</label>
+                                        <input type="password" class="form-control" name="password">
+                                    </div>
+
+                                    <div class="col-md-6 mb-20">
+                                        <label>Confirmação</label>
+                                        <input type="password" class="form-control" name="confirmacao">
+                                    </div>
+
+                                </div>  
+
+                                <div class="form-group row">
+                                
+                                    <div class="col-md-6 mb-20">
+                                        <label>Perfil de acesso</label>
+                                        
+                                        <select class="form-control" name="perfil">
+                                            
+                                            <option value="2">Atendente</option>
+                                            <option value="1">Administrador</option>
+
+                                        </select>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 mb-20">
+                                        <label>Ativo</label>
+                                        
+                                        <select class="form-control" name="active">
+                                        
+                                            <?php if(isset($usuarios)): ?>
+
+                                            <option value="0" <?php echo ($usuarios->active == 0 ? 'selected' : '') ?> >Não</option>
+                                            <option value="1" <?php echo ($usuarios->active == 1 ? 'selected' : '') ?>>Sim</option>
+                                            
+                                            <?php endif; ?>
+
+                                        </select>
+                                        
+                                    </div>
+                                </div> 
+
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
                                 <button class="btn btn-light">Cancel</button>
                             </form>
