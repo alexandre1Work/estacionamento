@@ -94,9 +94,19 @@
                                         <label>Perfil de acesso</label>
                                         
                                         <select class="form-control" name="perfil">
-                                            
-                                            <option value="2">Atendente</option>
-                                            <option value="1">Administrador</option>
+
+                                            <?php if (isset($usuarios)): ?>
+
+                                                <option value="2" <?php echo ($perfil_usuario->id == 2 ? 'selected' : ''); ?> >Atendente</option>
+
+                                                <option value="1" <?php echo ($perfil_usuario->id == 1 ? 'selected' : ''); ?> >Administrador</option>
+
+                                            <?php else: ?>
+
+                                                <option value="2">Atendente</option>
+                                                <option value="1">Administrador</option>
+
+                                            <?php endif; ?>
 
                                         </select>
                                         
@@ -112,12 +122,29 @@
                                             <option value="0" <?php echo ($usuarios->active == 0 ? 'selected' : '') ?> >Não</option>
                                             <option value="1" <?php echo ($usuarios->active == 1 ? 'selected' : '') ?>>Sim</option>
                                             
+                                            <?php else: ?>
+
+                                                <option value="0">Não</option>
+                                                <option value="1">Sim</option>
+
+
+
                                             <?php endif; ?>
 
                                         </select>
                                         
                                     </div>
+
                                 </div> 
+
+                                <?php if(isset($usuarios)): ?>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <input type="hidden" class="form-control" name="usuario_id" value=" 
+                                        <?php echo $usuarios->id; ?>">
+                                    </div>
+                                </div>
+                                <?php endif; ?>
 
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
                                 <button class="btn btn-light">Cancel</button>
