@@ -49,27 +49,50 @@ class Usuarios extends CI_Controller{
 
                 //Editar Usuário
 
+                $this->form_validation->set_rules('first_name', 'Nome', 'trim|required|min_length[3]|max_length[20]');
+
+                $this->form_validation->set_rules('last_name', 'Sobrenome', 'trim|required|min_length[3]|max_length[20]');
+
+                $this->form_validation->set_rules('username', 'Usuário', 'trim|required|min_length[3]|max_length[30]');
+
+                $this->form_validation->set_rules('email', 'E-mail', 'trim|valid_email|required|min_length[3]|max_length[200]');
+
+                $this->form_validation->set_rules('password', 'Senha', 'trim|min_length[8]');
+
+                $this->form_validation->set_rules('confirmacao', 'Confirmação', 'trim|matches[password]');
+
+                if($this->form_validation->run()){
+
+                    echo '<pre>';
+                    print_r ($this->input->post());
+                    exit();
+
+                } else {
+                    //erro de validação
+
+                    $data = array(
+                        'titulo' => 'Editar Usuário',
+                        'sub_titulo' => 'Chegou a hora de editar o usuário',
+                        'icone_view' => 'ik ik-user',
+                        'usuarios' => $this->ion_auth->user($usuario_id)->row(), //get all users
+                        'perfil_usuario' => $this->ion_auth->get_users_groups($usuario_id)->row(),
+                    );
+            
+                    // echo '<pre>';
+                    // print_r ($data['perfil_usuario']);
+                    // exit();
+            
+                    $this->load->view('layout/header', $data);
+                    $this->load->view('usuarios/core');
+                    $this->load->view('layout/footer');
+                }
 
             }
 
         }
 
 
-        $data = array(
-            'titulo' => 'Editar Usuário',
-            'sub_titulo' => 'Chegou a hora de editar o usuário',
-            'icone_view' => 'ik ik-user',
-            'usuarios' => $this->ion_auth->user($usuario_id)->row(), //get all users
-            'perfil_usuario' => $this->ion_auth->get_users_groups($usuario_id)->row(),
-        );
-
-        // echo '<pre>';
-        // print_r ($data['perfil_usuario']);
-        // exit();
-
-        $this->load->view('layout/header', $data);
-        $this->load->view('usuarios/core');
-        $this->load->view('layout/footer');
+        
     }
 
 
