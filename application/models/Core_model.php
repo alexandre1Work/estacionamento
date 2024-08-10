@@ -6,7 +6,7 @@ class Core_model extends CI_Model{
 
     public function get_all($table = NULL, $condition = NULL) {
 
-        if ($table && table_exists($table)) {
+        if ($table && $this->db->table_exists($table)) {
 
             if (is_array($condition)) {
                 
@@ -21,7 +21,7 @@ class Core_model extends CI_Model{
 
     public function get_by_id($table = NULL, $condition = NULL) {
 
-        if ($table && table_exists($table) && is_array($condition)) {
+        if ($table && $this->db->table_exists($table) && is_array($condition)) {
 
             $this->db->where($condition);
             $this->db->limit(1);
@@ -34,7 +34,7 @@ class Core_model extends CI_Model{
 
     public function insert($table = NULL, $data = NULL) {
 
-        if ($table && table_exists($table) && is_array($data)) {
+        if ($table && $this->db->table_exists($table) && is_array($data)) {
 
             $this->db->insert($table, $data);
 
@@ -51,7 +51,7 @@ class Core_model extends CI_Model{
 
     public function update($table = NULL, $data = NULL, $condition = NULL) {
 
-        if ($table && table_exists($table) && is_array($data) && is_array($condition)) {
+        if ($table && $this->db->table_exists($table) && is_array($data) && is_array($condition)) {
 
             if($this->db->update($table, $data, $condition)){
 
@@ -68,7 +68,7 @@ class Core_model extends CI_Model{
 
     public function delete($table = NULL, $condition = NULL) {
 
-        if ($table && table_exists($table) && is_array($condition)) {
+        if ($table && $this->db->table_exists($table) && is_array($condition)) {
             
             if($this->db->delete($table, $condition)) {
 

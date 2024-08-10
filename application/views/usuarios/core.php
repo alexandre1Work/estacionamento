@@ -152,8 +152,8 @@
                                 </div>
                                 <?php endif; ?>
 
-                                <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                <button class="btn btn-light">Cancel</button>
+                                <button type="submit" class="btn btn-primary mr-2">Salvar</button>
+                                <a class="btn btn-info" href="<?php echo base_url($this->router->fetch_class()); ?>">Voltar</a>
                             </form>
 
                         </div>
