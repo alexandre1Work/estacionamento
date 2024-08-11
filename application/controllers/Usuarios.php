@@ -33,10 +33,66 @@ class Usuarios extends CI_Controller{
 
         if(!$usuario_id){
 
-            exit('Pode cadastra um novo usuário');
-
             //cadastro de novo usuário
 
+                $perfil_atual = $this->ion_auth->get_users_groups($usuario_id)->row();
+
+                $this->form_validation->set_rules('first_name', 'Nome', 'trim|required|min_length[3]|max_length[20]');
+
+                $this->form_validation->set_rules('last_name', 'Sobrenome', 'trim|required|min_length[3]|max_length[20]');
+
+                $this->form_validation->set_rules('username', 'Usuário', 'trim|required|min_length[3]|max_length[30]|is_unique[users.username]');
+
+                $this->form_validation->set_rules('email', 'E-mail', 'trim|valid_email|required|min_length[3]|max_length[200]|is_unique[users.email]');
+
+                $this->form_validation->set_rules('password', 'Senha', 'trim|required|min_length[8]');
+
+                $this->form_validation->set_rules('confirmacao', 'Confirmação', 'trim|required|matches[password]');
+
+                if($this->form_validation->run()) {
+
+                    // echo '<pre>';
+                    // print_r ($this->input->post());
+                    // exit();
+
+                    $username = html_escape($this->input->post('username'));
+                    $password = html_escape($this->input->post('password'));
+                    $email = html_escape($this->input->post('email'));
+                    $additional_data = array(
+                                'first_name' => $this->input->post('first_name'),
+                                'last_name' => $this->input->post('last_name'),
+                                'active' => $this->input->post('active'),
+                                );
+                    $group = array($this->input->post('perfil')); 
+                
+                    $additional_data = html_escape($additional_data);
+
+                    if($this->ion_auth->register($username, $password, $email, $additional_data, $group)) {
+                        $this->session->set_flashdata('sucesso', 'Dados salvos com sucesso!');
+                    } else {
+                        $this->session->set_flashdata('error', 'Erro ao salvar os dados!');
+                    }
+
+                    redirect($this->router->fetch_class());
+                }else{
+
+                    //erro de validação
+
+                    $data = array(
+                        'titulo' => 'Cadastrar usuário',
+                        'sub_titulo' => 'Chegou a hora de cadastrar um novo usuário',
+                        'icone_view' => 'ik ik-user',
+                    );
+            
+                    // echo '<pre>';
+                    // print_r ($data['perfil_usuario']);
+                    // exit();
+            
+                    $this->load->view('layout/header', $data);
+                    $this->load->view('usuarios/core');
+                    $this->load->view('layout/footer');
+
+                }
         }
         else{
 

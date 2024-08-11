@@ -50,7 +50,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header"> <a class="btn btn-success" href="">+Novo</a> </div>
+                        <div class="card-header"> <a data-toggle="tooltip" data-placement="right" title="Cadastrar <?php echo $this->router->fetch_class(); ?>" class="btn btn-success" href="<?php echo base_url($this->router->fetch_class() . '/core/'); ?>">+Novo</a> </div>
                         <div class="card-body">
                             <table class="table data_table">
                                 <thead>
@@ -76,10 +76,10 @@
                                         <td><?php echo ($this->ion_auth->is_admin($user->id) ? 'Administrador' : 'Atendente'); ?></td>
                                         <td><?php echo ($user->active == 1 ? '<span class="badge badge-pill badge-success mb-1">Sim</span>' : '<span class="badge badge-pill badge-warning mb-1">Não</span>'); ?></td>
                                         <td class="text-right">
-                                    <a data-toggle="tooltip" data-placement="bottom" title="Editar <?php $this->router->fetch_class(); ?>" href="<?php echo base_url('usuarios/core/'.$user->id); ?>" class="btn btn-primary">
+                                        <a data-toggle="tooltip" data-placement="bottom" title="Editar <?php echo $this->router->fetch_class(); ?>" href="<?php echo base_url('usuarios/core/'.$user->id); ?>" class="btn btn-primary">
                                             <i class="ik ik-edit-2"></i>Editar
                                         </a> 
-                                        <a data-toggle="tooltip" data-placement="bottom" title="Excluir <?php $this->router->fetch_class(); ?> " href="" class="btn btn-danger">
+                                        <a data-toggle="tooltip" data-placement="bottom" title="Excluir <?php echo $this->router->fetch_class(); ?> " href="" class="btn btn-danger">
                                             <i class="ik ik-trash-2"></i>Excluir
                                         </a> 
                                     </tr>

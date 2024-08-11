@@ -72,7 +72,7 @@
 
                                     <div class="col-md-6 mb-20">
                                         <label>E-mail (Login)</label>
-                                        <input type="text" class="form-control" name="email" value="<?php echo(isset($usuarios) ? $usuarios->email : set_value('email')); ?>">
+                                        <input type="email" class="form-control" name="email" value="<?php echo(isset($usuarios) ? $usuarios->email : set_value('email')); ?>">
                                         <?php echo form_error('email', '<div class="text-danger">', '</div>'); ?>
                                     </div>
                                 
