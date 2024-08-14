@@ -233,7 +233,23 @@ class Usuarios extends CI_Controller{
             
             $this->session->set_flashdata('error', 'Usuário não encontrado');
             redirect($this->router->fetch_class());
-        } 
+        } else {
+            // Deleta
+
+            if ($this->ion_auth->is_admin($usuario_id)) {
+                $this->session->set_flashdata('error', 'Administrador não pode ser excluído!');
+                redirect($this->router->fetch_class());
+            }
+
+            if($this->ion_auth->delete_user($usuario_id)) {
+                $this->session->set_flashdata('sucesso', 'Registro excluído com sucesso!');
+            }else{
+                $this->session->set_flashdata('error', 'Não foi possível excluir o registro!');
+            }
+
+            redirect($this->router->fetch_class());
+
+        }
 
     }
 
