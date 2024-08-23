@@ -73,7 +73,7 @@
                                     </div>
 
                                     <div class="col-md-2 mb-20">
-                                        <label>Número de vagas</label>
+                                        <label>Ativa</label>
                                         <select class="form-control" name="precificacao_ativa">
 
                                             <?php if (isset($precificacao)): ?>
