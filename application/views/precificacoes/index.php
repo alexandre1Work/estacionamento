@@ -12,8 +12,7 @@
                 <div class="row align-items-end">
                     <div class="col-lg-8">
                         <div class="page-header-title">
-                            
-                            <i class="ik ik-users bg-blue"></i>
+                            <i class=" <?php echo $icone_view; ?> bg-blue"></i>
                             <div class="d-inline">
                                 <h5> <?php echo $titulo; ?> </h5>
                                 <span> <?php echo $sub_titulo; ?> </span>
@@ -67,45 +66,46 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header"> <a data-toggle="tooltip" data-placement="right" title="Cadastrar <?php echo $this->router->fetch_class(); ?>" class="btn btn-success" href="<?php echo base_url($this->router->fetch_class() . '/core/'); ?>">+ Novo Usuário</a> </div>
+                        <div class="card-header"> <a data-toggle="tooltip" data-placement="right" title="Cadastrar <?php echo $this->router->fetch_class(); ?>" class="btn btn-success" href="<?php echo base_url($this->router->fetch_class() . '/core/'); ?>">+ Nova Categoria</a> </div>
                         <div class="card-body">
                             <table class="table data_table">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Usuário</th>
-                                        <th>E-mail</th>
-                                        <th>Nome</th>
-                                        <th>Perfil de Acesso</th>
-                                        <th>Ativo</th>
+                                        <th>Categoria</th>
+                                        <th class="text-center">Valor da hora</th>
+                                        <th class="text-center">Valor da mensalidade</th>
+                                        <th class="text-center">Número de vagas</th>
+                                        <th>Ativa</th>
                                         <th class="nosort text-right pr-45">
                                             <span class="pr-40">Ações</span>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($usuarios as $user): ?>
+                                    <?php foreach ($precificacoes as $categoria): ?>
                                     <tr>
-                                        <td><?php echo $user->id; ?></td>
-                                        <td><?php echo $user->username; ?></td>
-                                        <td><?php echo $user->email; ?></td>
-                                        <td><?php echo $user->first_name; ?></td>
-                                        <td><?php echo ($this->ion_auth->is_admin($user->id) ? 'Administrador' : 'Atendente'); ?></td>
-                                        <td><?php echo ($user->active == 1 ? '<span class="badge badge-pill badge-success mb-1"> 
+                                        <td><?php echo $categoria->precificacao_id; ?></td>
+                                        <td><?php echo $categoria->precificacao_categoria; ?></td>
+                                        <td class="text-center"><?php echo 'R$ ' . $categoria->precificacao_valor_hora; ?></td>
+                                        <td class="text-center"><?php echo 'R$ ' .$categoria->precificacao_valor_mensalidade; ?></td>
+                                        <td class="text-center"><?php echo $categoria->precificacao_numero_vagas; ?></td>
+
+                                        <td><?php echo ($categoria->precificacao_ativa == 1 ? '<span class="badge badge-pill badge-success mb-1"> 
                                         <i class="fas fa-lock-open"></i> &nbsp;Sim</span>' : '<span class="badge badge-pill badge-warning mb-1"> <i class="fas fa-lock"></i> &nbsp;Não</span>'); ?></td>
                                         <td class="text-right">
-                                        <a data-toggle="tooltip" data-placement="bottom" title="Editar <?php echo $this->router->fetch_class(); ?>" href="<?php echo base_url($this->router->fetch_class().'/core/'.$user->id); ?>" class="btn btn-primary">
+                                        <a data-toggle="tooltip" data-placement="bottom" title="Editar <?php echo $this->router->fetch_class(); ?>" href="<?php echo base_url($this->router->fetch_class().'/core/'.$categoria->precificacao_id); ?>" class="btn btn-primary">
                                             <i class="ik ik-edit-2"></i>Editar
                                         </a> 
 
                                         <button type="button" title="Excluir <?php echo $this->router->fetch_class(); ?> " class="btn btn-danger" data-toggle="modal" 
-                                        data-target="#user-<?php echo $user->id; ?>">
+                                        data-target="#categoria-<?php echo $categoria->precificacao_id; ?>">
                                             <i class="ik ik-trash-2"></i>Excluir
                                         </button> 
 
                                     </tr>
 
-                                    <div class="modal fade" id="user-<?php echo $user->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+                                    <div class="modal fade" id="categoria-<?php echo $categoria->precificacao_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -118,7 +118,7 @@
                                                 <div class="modal-footer">
                                                     <button data-toggle="tooltip"    data-placement="bottom" title="Cancelar" type="button" class="btn btn-secondary" data-dismiss="modal">Não, voltar</button>
 
-                                                    <a data-toggle="tooltip"    data-placement="bottom" title="Excluir" href="<?php echo base_url($this->router->fetch_class().'/del/'.$user->id); ?>" class="btn btn-danger">
+                                                    <a data-toggle="tooltip"    data-placement="bottom" title="Excluir" href="<?php echo base_url($this->router->fetch_class().'/del/'.$categoria->precificacao_id); ?>" class="btn btn-danger">
                                                     Sim, excluir
                                                     </a>
                                                 </div>
