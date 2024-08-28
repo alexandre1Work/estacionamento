@@ -40,7 +40,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header"> 
-                            <?php echo(isset($usuarios) ? '<i class="ik ik-calendar ik-1x"></i> &nbsp; Data da última alteração:&nbsp;'.formata_data_banco_com_hora ($usuarios-> data_ultima_alteracao) : ''); ?> 
+                            <?php echo(isset($mensalista) ? '<i class="ik ik-calendar ik-1x"></i> &nbsp; Data da última alteração:&nbsp;'.formata_data_banco_com_hora ($mensalista-> mensalista_data_alteracao) : ''); ?> 
                         </div>
                         <div class="card-body">
                         
@@ -48,106 +48,141 @@
 
                                 <div class="form-group row">
                                 
-                                    <div class="col-md-6 mb-20">
+                                    <div class="col-md-4 mb-20">
                                         <label>Nome</label>
-                                        <input type="text" class="form-control" name="first_name" value="<?php echo(isset($usuarios) ? $usuarios->first_name : set_value('first_name')); ?>">
-                                        <?php echo form_error('first_name', '<div class="text-danger">', '</div>'); ?>
+                                        <input type="text" class="form-control" name="mensalista_nome" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_nome : set_value('mensalista_nome')); ?>">
+                                        <?php echo form_error('mensalista_nome', '<div class="text-danger">', '</div>'); ?>
                                     </div>
 
-                                    <div class="col-md-6 mb-20">
+                                    <div class="col-md-8 mb-20">
                                         <label>Sobrenome</label>
-                                        <input type="text" class="form-control" name="last_name" value="<?php echo(isset($usuarios) ? $usuarios->last_name : set_value('last_name')); ?>">
-                                        <?php echo form_error('last_name', '<div class="text-danger">', '</div>'); ?>
+                                        <input type="text" class="form-control" name="mensalista_sobrenome" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_sobrenome : set_value('mensalista_sobrenome')); ?>">
+                                        <?php echo form_error('mensalista_sobrenome', '<div class="text-danger">', '</div>'); ?>
                                     </div>
 
-                                </div>   
+                                    
+                                    <div class="col-md-2 mb-20">
+                                        <label>Data de nascimento</label>
+                                        <input type="date" class="form-control" name="mensalista_data_nascimento" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_data_nascimento : set_value('mensalista_data_nascimento')); ?>">
+                                        <?php echo form_error('mensalista_data_nascimento', '<div class="text-danger">', '</div>'); ?>
+                                    </div>
+
+                                    <div class="col-md-2 mb-20">
+                                        <label>CPF</label>
+                                        <input type="text" class="form-control cpf" name="mensalista_cpf" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_cpf : set_value('mensalista_cpf')); ?>">
+                                        <?php echo form_error('mensalista_cpf', '<div class="text-danger">', '</div>'); ?>
+                                    </div>
+
+                                    <div class="col-md-2 mb-20">
+                                        <label>RG</label>
+                                        <input type="text" class="form-control" name="mensalista_rg" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_rg : set_value('mensalista_rg')); ?>">
+                                        <?php echo form_error('mensalista_rg', '<div class="text-danger">', '</div>'); ?>
+                                    </div>
+
+                                    <div class="col-md-6 mb-20">
+                                        <label>E-mail</label>
+                                        <input type="email" class="form-control" name="mensalista_email" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_email : set_value('mensalista_email')); ?>">
+                                        <?php echo form_error('mensalista_email', '<div class="text-danger">', '</div>'); ?>
+                                    </div>
+
+                                    <div class="col-md-2 mb-20">
+                                        <label>Telefone Fixo</label>
+                                        <input type="text" class="form-control sp_celphones" name="mensalista_telefone_fixo" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_telefone_fixo : set_value('mensalista_telefone_fixo')); ?>">
+                                        <?php echo form_error('mensalista_telefone_fixo', '<div class="text-danger">', '</div>'); ?>
+                                    </div>
+
+                                    <div class="col-md-2 mb-20">
+                                        <label>Telefone Móvel</label>
+                                        <input type="text" class="form-control sp_celphones" name="mensalista_telefone_movel" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_telefone_movel : set_value('mensalista_telefone_movel')); ?>">
+                                        <?php echo form_error('mensalista_telefone_movel', '<div class="text-danger">', '</div>'); ?>
+                                    </div>
+
+
+                                    <div class="col-md-2 mb-20">
+                                        <label>CEP</label>
+                                        <input type="text" class="form-control cep" name="mensalista_cep" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_cep : set_value('mensalista_cep')); ?>">
+                                        <?php echo form_error('mensalista_cep', '<div class="text-danger">', '</div>'); ?>
+                                    </div>
+
+                                    <div class="col-md-4 mb-20">
+                                        <label>Endereço</label>
+                                        <input type="text" class="form-control" name="mensalista_endereco" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_endereco : set_value('mensalista_endereco')); ?>">
+                                        <?php echo form_error('mensalista_endereco', '<div class="text-danger">', '</div>'); ?>
+                                    </div>
+
+                                    <div class="col-md-2 mb-20">
+                                        <label>Número</label>
+                                        <input type="text" class="form-control" name="mensalista_numero_endereco" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_numero_endereco : set_value('mensalista_numero_endereco')); ?>">
+                                        <?php echo form_error('mensalista_numero_endereco', '<div class="text-danger">', '</div>'); ?>
+                                    </div>
+
+                                    <div class="col-md-2 mb-20">
+                                        <label>Bairro</label>
+                                        <input type="text" class="form-control" name="mensalista_bairro" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_bairro : set_value('mensalista_bairro')); ?>">
+                                        <?php echo form_error('mensalista_bairro', '<div class="text-danger">', '</div>'); ?>
+                                    </div>
+
+                                    <div class="col-md-2 mb-20">
+                                        <label>Cidade</label>
+                                        <input type="text" class="form-control" name="mensalista_cidade" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_cidade : set_value('mensalista_cidade')); ?>">
+                                        <?php echo form_error('mensalista_cidade', '<div class="text-danger">', '</div>'); ?>
+                                    </div>
+
+                                    <div class="col-md-2 mb-20">
+                                        <label>UF</label>
+                                        <input type="text" class="form-control uf" name="mensalista_estado" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_estado : set_value('mensalista_estado')); ?>">
+                                        <?php echo form_error('mensalista_estado', '<div class="text-danger">', '</div>'); ?>
+                                    </div>
+
+                                    <div class="col-md-6 mb-20">
+                                        <label>Complemento</label>
+                                        <input type="text" class="form-control" name="mensalista_complemento" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_complemento : set_value('mensalista_complemento')); ?>">
+                                        <?php echo form_error('mensalista_complemento', '<div class="text-danger">', '</div>'); ?>
+                                    </div>
+
+                                </div> 
 
                                 <div class="form-group row">
-                                
-                                    <div class="col-md-6 mb-20">
-                                        <label>Usuário</label>
-                                        <input type="text" class="form-control" name="username" value="<?php echo(isset($usuarios) ? $usuarios->username : set_value('username')); ?>">
-                                        <?php echo form_error('username', '<div class="text-danger">', '</div>'); ?>
-                                    </div>
 
-                                    <div class="col-md-6 mb-20">
-                                        <label>E-mail (Login)</label>
-                                        <input type="email" class="form-control" name="email" value="<?php echo(isset($usuarios) ? $usuarios->email : set_value('email')); ?>">
-                                        <?php echo form_error('email', '<div class="text-danger">', '</div>'); ?>
-                                    </div>
-                                
-                                </div>  
-
-                                <div class="form-group row">
-                                
-                                    <div class="col-md-6 mb-20">
-                                        <label>Senha</label>
-                                        <input type="password" class="form-control" name="password">
-                                        <?php echo form_error('password', '<div class="text-danger">', '</div>'); ?>
-                                    </div>
-
-                                    <div class="col-md-6 mb-20">
-                                        <label>Confirmação</label>
-                                        <input type="password" class="form-control" name="confirmacao">
-                                        <?php echo form_error('confirmacao', '<div class="text-danger">', '</div>'); ?>
-                                    </div>
-
-                                </div>  
-
-                                <div class="form-group row">
-                                
-                                    <div class="col-md-6 mb-20">
-                                        <label>Perfil de acesso</label>
-                                        
-                                        <select class="form-control" name="perfil">
-
-                                            <?php if (isset($usuarios)): ?>
-
-                                                <option value="2" <?php echo ($perfil_usuario->id == 2 ? 'selected' : ''); ?> >Atendente</option>
-
-                                                <option value="1" <?php echo ($perfil_usuario->id == 1 ? 'selected' : ''); ?> >Administrador</option>
-
-                                            <?php else: ?>
-
-                                                <option value="2">Atendente</option>
-                                                <option value="1">Administrador</option>
-
-                                            <?php endif; ?>
-
-                                        </select>
-                                        
-                                    </div>
-
-                                    <div class="col-md-6 mb-20">
+                                    <div class="col-md-2 mb-20">
                                         <label>Ativo</label>
-                                        
                                         <select class="form-control" name="active">
                                         
-                                            <?php if(isset($usuarios)): ?>
+                                            <?php if(isset($mensalista)): ?>
 
-                                            <option value="0" <?php echo ($usuarios->active == 0 ? 'selected' : '') ?> >Não</option>
-                                            <option value="1" <?php echo ($usuarios->active == 1 ? 'selected' : '') ?>>Sim</option>
+                                            <option value="0" <?php echo ($mensalista->mensalista_ativo == 0 ? 'selected' : '') ?> >Não</option>
+                                            <option value="1" <?php echo ($mensalista->mensalista_ativo == 1 ? 'selected' : '') ?>>Sim</option>
                                             
                                             <?php else: ?>
 
                                                 <option value="0">Não</option>
                                                 <option value="1">Sim</option>
 
-
-
                                             <?php endif; ?>
-
                                         </select>
                                         
                                     </div>
 
+                                    <div class="col-md-4 mb-20">
+                                        <label>Dia vencimento mensalidade</label>
+                                        <input type="number" class="form-control" name="mensalista_dia_vencimento" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_dia_vencimento : set_value('mensalista_dia_vencimento')); ?>">
+                                        <?php echo form_error('mensalista_dia_vencimento', '<div class="text-danger">', '</div>'); ?>
+                                    </div>
+
+                                    <div class="col-md-6 mb-20">
+                                        <label>Observações</label>
+                                        <textarea rows="1" class="form-control" name="mensalista_obs">
+                                        <?php echo(isset($mensalista) ? $mensalista->mensalista_obs : set_value('mensalista_obs')); ?>
+                                        </textarea>
+                                    </div>
+
                                 </div> 
 
-                                <?php if(isset($usuarios)): ?>
+                                <?php if(isset($mensalista)): ?>
                                 <div class="form-group row">
                                     <div class="col-md-12">
-                                        <input type="hidden" class="form-control" name="usuario_id" 
-                                        value="<?php echo $usuarios->id; ?>">
+                                        <input type="hidden" class="form-control" name="mensalista_id" 
+                                        value="<?php echo $mensalista->mensalista_id; ?>">
                                     </div>
                                 </div>
                                 <?php endif; ?>
