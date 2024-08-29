@@ -87,7 +87,7 @@
 
                                     <div class="col-md-2 mb-20">
                                         <label>Telefone Fixo</label>
-                                        <input type="text" class="form-control sp_celphones" name="mensalista_telefone_fixo" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_telefone_fixo : set_value('mensalista_telefone_fixo')); ?>">
+                                        <input type="text" class="form-control phone_with_ddd" name="mensalista_telefone_fixo" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_telefone_fixo : set_value('mensalista_telefone_fixo')); ?>">
                                         <?php echo form_error('mensalista_telefone_fixo', '<div class="text-danger">', '</div>'); ?>
                                     </div>
 
