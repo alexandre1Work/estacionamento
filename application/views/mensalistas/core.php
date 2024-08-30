@@ -146,7 +146,7 @@
 
                                     <div class="col-md-2 mb-20">
                                         <label>Ativo</label>
-                                        <select class="form-control" name="active">
+                                        <select class="form-control" name="mensalista_ativo">
                                         
                                             <?php if(isset($mensalista)): ?>
 
@@ -174,6 +174,7 @@
                                         <textarea rows="1" class="form-control" name="mensalista_obs">
                                         <?php echo(isset($mensalista) ? $mensalista->mensalista_obs : set_value('mensalista_obs')); ?>
                                         </textarea>
+                                        <?php echo form_error('mensalista_obs', '<div class="text-danger">', '</div>'); ?>
                                     </div>
 
                                 </div> 

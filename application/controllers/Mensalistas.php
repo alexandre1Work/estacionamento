@@ -42,6 +42,80 @@ class Mensalistas extends CI_Controller{
 
         if(!$mensalista_id){
             //cadastrando
+
+                $this->form_validation->set_rules('mensalista_nome', 'Nome', 'trim|required|min_length[3]|max_length[20]');
+                $this->form_validation->set_rules('mensalista_sobrenome', 'Sobrenome', 'trim|required|min_length[3]|max_length[150]');
+                $this->form_validation->set_rules('mensalista_data_nascimento', 'Data nascimento', 'required');
+                $this->form_validation->set_rules('mensalista_cpf', 'CPF', 'trim|required|exact_length[14]|is_unique[mensalistas.mensalista_cpf]|callback_valida_cpf');
+                $this->form_validation->set_rules('mensalista_rg', 'RG', 'trim|required|min_length[7]|max_length[14]|is_unique[mensalistas.mensalista_rg]');
+                $this->form_validation->set_rules('mensalista_email', 'E-mail', 'trim|required|valid_email|max_length[50]|is_unique[mensalistas.mensalista_email]');
+                $mensalista_telefone_fixo =$this->input->post('mensalista_telefone_fixo');
+                if(!empty($mensalista_telefone_fixo)){
+                    $this->form_validation->set_rules('mensalista_telefone_fixo', 'Telefone Fixo', 'trim|exact_length[14]|is_unique[mensalistas.mensalista_telefone_fixo]');
+                }
+                $this->form_validation->set_rules('mensalista_telefone_movel', 'Telefone Movel', 'trim|required|min_length[14]|max_length[15]|is_unique[mensalistas.mensalista_telefone_movel]');
+                $this->form_validation->set_rules('mensalista_cep', 'CEP', 'trim|required|exact_length[9]');
+                $this->form_validation->set_rules('mensalista_endereco', 'Endereço', 'trim|required|min_length[3]|max_length[150]');
+                $this->form_validation->set_rules('mensalista_numero_endereco', 'Número', 'trim|required|max_length[20]');
+                $this->form_validation->set_rules('mensalista_bairro', 'Bairro', 'trim|required|min_length[3]|max_length[45]');
+                $this->form_validation->set_rules('mensalista_cidade', 'Cidade', 'trim|required|min_length[3]|max_length[45]');
+                $this->form_validation->set_rules('mensalista_estado', 'UF', 'trim|required|exact_length[2]');
+                $this->form_validation->set_rules('mensalista_complemento', 'Complemento', 'trim|max_length[145]');
+                $this->form_validation->set_rules('mensalista_dia_vencimento', 'Dia vencimento mensalidade', 'trim|required|integer|greater_than[0]|less_than[32]');
+                $this->form_validation->set_rules('mensalista_obs', 'Observações', 'trim|max_length[500]');
+
+            if($this->form_validation->run()) {
+
+                $data = elements(
+                    array(
+                        'mensalista_nome',
+                        'mensalista_sobrenome',
+                        'mensalista_data_nascimento',
+                        'mensalista_cpf',
+                        'mensalista_rg',
+                        'mensalista_email',
+                        'mensalista_telefone_fixo',
+                        'mensalista_telefone_movel',
+                        'mensalista_cep',
+                        'mensalista_endereco',
+                        'mensalista_numero_endereco',
+                        'mensalista_bairro',
+                        'mensalista_cidade',
+                        'mensalista_estado',
+                        'mensalista_complemento',
+                        'mensalista_ativo',
+                        'mensalista_dia_vencimento',
+                        'mensalista_obs',
+                    ), $this->input->post()
+                );
+
+                $data['mensalista_estado'] = strtoupper($this->input->post('mensalista_estado'));
+
+                $data = html_escape($data);
+
+                $this->core_model->insert('mensalistas', $data);
+                redirect($this->router->fetch_class());
+                
+            } else {
+                
+                //erro de validação
+                $data = array(
+                    'titulo' => 'Editar Mensalista',
+                    'sub_titulo' => 'Chegou a hora de listar o Mensalista',
+                    'icone_view' => 'fa fa-user-tie',
+                    'scripts' => array(
+                        'plugins/mask/jquery.mask.min.js',
+                        'plugins/mask/custom.js',
+                    ),
+                    'mensalista' => $this->core_model->get_by_id('mensalistas', array('mensalista_id' => $mensalista_id)),
+                );
+        
+        
+                $this->load->view('layout/header', $data);
+                $this->load->view('mensalistas/core');
+                $this->load->view('layout/footer');
+            }
+
         }else{
             if(!$this->core_model->get_by_id('mensalistas', array('mensalista_id' => $mensalista_id))){
                 $this->session->set_flashdata('error', 'Mensalista não encontrado');
@@ -54,13 +128,20 @@ class Mensalistas extends CI_Controller{
                 $this->form_validation->set_rules('mensalista_cpf', 'CPF', 'trim|required|exact_length[14]|callback_valida_cpf');
                 $this->form_validation->set_rules('mensalista_rg', 'RG', 'trim|required|min_length[7]|max_length[14]|callback_check_rg');
                 $this->form_validation->set_rules('mensalista_email', 'E-mail', 'trim|required|valid_email|max_length[50]|callback_check_email');
-
                 $mensalista_telefone_fixo =$this->input->post('mensalista_telefone_fixo');
                 if(!empty($mensalista_telefone_fixo)){
                     $this->form_validation->set_rules('mensalista_telefone_fixo', 'Telefone Fixo', 'trim|exact_length[14]|callback_check_telefone_fixo');
                 }
-                
                 $this->form_validation->set_rules('mensalista_telefone_movel', 'Telefone Movel', 'trim|required|min_length[14]|max_length[15]|callback_check_telefone_movel');
+                $this->form_validation->set_rules('mensalista_cep', 'CEP', 'trim|required|exact_length[9]');
+                $this->form_validation->set_rules('mensalista_endereco', 'Endereço', 'trim|required|min_length[3]|max_length[150]');
+                $this->form_validation->set_rules('mensalista_numero_endereco', 'Número', 'trim|required|max_length[20]');
+                $this->form_validation->set_rules('mensalista_bairro', 'Bairro', 'trim|required|min_length[3]|max_length[45]');
+                $this->form_validation->set_rules('mensalista_cidade', 'Cidade', 'trim|required|min_length[3]|max_length[45]');
+                $this->form_validation->set_rules('mensalista_estado', 'UF', 'trim|required|exact_length[2]');
+                $this->form_validation->set_rules('mensalista_complemento', 'Complemento', 'trim|max_length[145]');
+                $this->form_validation->set_rules('mensalista_dia_vencimento', 'Dia vencimento mensalidade', 'trim|required|integer|greater_than[0]|less_than[32]');
+                $this->form_validation->set_rules('mensalista_obs', 'Observações', 'trim|max_length[500]');
             /*             
                 [mensalista_nome] => Lucio
                 [mensalista_sobrenome] => Souza
@@ -84,9 +165,36 @@ class Mensalistas extends CI_Controller{
 
             if($this->form_validation->run()) {
 
-                echo '<pre>';
-                print_r($this->input->post());
-                exit();
+                $data = elements(
+                    array(
+                        'mensalista_nome',
+                        'mensalista_sobrenome',
+                        'mensalista_data_nascimento',
+                        'mensalista_cpf',
+                        'mensalista_rg',
+                        'mensalista_email',
+                        'mensalista_telefone_fixo',
+                        'mensalista_telefone_movel',
+                        'mensalista_cep',
+                        'mensalista_endereco',
+                        'mensalista_numero_endereco',
+                        'mensalista_bairro',
+                        'mensalista_cidade',
+                        'mensalista_estado',
+                        'mensalista_complemento',
+                        'mensalista_ativo',
+                        'mensalista_dia_vencimento',
+                        'mensalista_obs',
+                    ), $this->input->post()
+                );
+
+                $data['mensalista_estado'] = strtoupper($this->input->post('mensalista_estado'));
+
+                $data = html_escape($data);
+
+                $this->core_model->update('mensalistas',$data, array('mensalista_id' => $mensalista_id));
+                redirect($this->router->fetch_class());
+                
             } else {
                 
                 //erro de validação
