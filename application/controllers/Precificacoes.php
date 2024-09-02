@@ -115,6 +115,7 @@ class Precificacoes extends CI_Controller{
                         if($this->db->table_exists('estacionar')) {
                             if($this->core_model->get_by_id('estacionar', array('estacionar_precificacao_id' => $precificacao_id, 'estacionar_status' => 0))) {
                                 $this->session->set_flashdata('error', 'Esta categoria está sendo utilizada em Estacionar');
+                                redirect($this->router->fetch_class());
                             }
                         }
                     }

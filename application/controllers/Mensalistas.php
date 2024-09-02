@@ -121,6 +121,8 @@ class Mensalistas extends CI_Controller{
                 $this->session->set_flashdata('error', 'Mensalista não encontrado');
                 redirect($this->router->fetch_class());
             }else{
+                //editando
+
                 
                 $this->form_validation->set_rules('mensalista_nome', 'Nome', 'trim|required|min_length[3]|max_length[20]');
                 $this->form_validation->set_rules('mensalista_sobrenome', 'Sobrenome', 'trim|required|min_length[3]|max_length[150]');
@@ -162,8 +164,22 @@ class Mensalistas extends CI_Controller{
                 [mensalista_dia_vencimento] => 31
                 [mensalista_obs] =>  
             */
+       
+                if ($this->form_validation->run()) {
 
-            if($this->form_validation->run()) {
+                    $mensalista_ativo = $this -> input -> post('precificacao_ativa');
+
+                    if($mensalista_ativo == 0) {
+
+                        if($this->db->table_exists('mensalidades')) {
+
+                            if($this->core_model->get_by_id('mensalidades', array('mensalidade_mensalista_id' => $mensalista_id, 'mensalidade_status' => 0))) {
+                                $this->session->set_flashdata('error', 'Ação não permitida: Este mensalista não pode ser desativado porque existem mensalidades em aberto.');
+                                redirect($this->router->fetch_class());
+                            }
+                        }
+                    }
+                
 
                 $data = elements(
                     array(
@@ -298,5 +314,22 @@ class Mensalistas extends CI_Controller{
         }else{
             return TRUE;
         }
+    }
+
+    public function del($mensalista_id = NULL) {
+        //se não foi passaado ao metodo del um id ele retorna
+        //OU se foi passado mas não existe tbm retorna o erro
+        if(!$mensalista_id || !$this->core_model->get_by_id('mensalistas', array('mensalista_id' => $mensalista_id))){
+            $this->session->set_flashdata('error', 'Mensalista não encontrado');
+            redirect($this->router->fetch_class());
+        }
+        // se estiver tentando deletar um mensalista ativo
+        if($this->core_model->get_by_id('mensalistas', array('mensalista_id' => $mensalista_id, 'mensalista_ativo' => 1))){
+            $this->session->set_flashdata('error', 'Não é possivel excluir mensalista ativo');
+            redirect($this->router->fetch_class());
+        } 
+        // passando as verificações chega o metodo de del
+        $this->core_model->delete('mensalistas', array('mensalista_id' => $mensalista_id));
+        redirect($this->router->fetch_class());
     }
 }
