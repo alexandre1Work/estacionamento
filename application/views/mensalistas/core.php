@@ -54,14 +54,14 @@
                                         <?php echo form_error('mensalista_nome', '<div class="text-danger">', '</div>'); ?>
                                     </div>
 
-                                    <div class="col-md-8 mb-20">
+                                    <div class="col-md-5 mb-20">
                                         <label>Sobrenome</label>
                                         <input type="text" class="form-control" name="mensalista_sobrenome" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_sobrenome : set_value('mensalista_sobrenome')); ?>">
                                         <?php echo form_error('mensalista_sobrenome', '<div class="text-danger">', '</div>'); ?>
                                     </div>
 
                                     
-                                    <div class="col-md-2 mb-20">
+                                    <div class="col-md-3 mb-20">
                                         <label>Data de nascimento</label>
                                         <input type="date" class="form-control" name="mensalista_data_nascimento" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_data_nascimento : set_value('mensalista_data_nascimento')); ?>">
                                         <?php echo form_error('mensalista_data_nascimento', '<div class="text-danger">', '</div>'); ?>
@@ -79,7 +79,13 @@
                                         <?php echo form_error('mensalista_rg', '<div class="text-danger">', '</div>'); ?>
                                     </div>
 
-                                    <div class="col-md-6 mb-20">
+                                    <div class="col-md-3 mb-20">
+                                        <label>CNPJ</label>
+                                        <input  type="text" class="form-control cnpj" name="mensalista_cnpj" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_cnpj : set_value('mensalista_cnpj')); ?>">
+                                        <?php echo form_error('mensalista_cnpj', '<div class="text-danger">', '</div>'); ?>
+                                    </div>
+
+                                    <div class="col-md-5 mb-20">
                                         <label>E-mail</label>
                                         <input type="email" class="form-control" name="mensalista_email" value="<?php echo(isset($mensalista) ? $mensalista->mensalista_email : set_value('mensalista_email')); ?>">
                                         <?php echo form_error('mensalista_email', '<div class="text-danger">', '</div>'); ?>

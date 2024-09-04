@@ -48,6 +48,7 @@ class Mensalistas extends CI_Controller{
                 $this->form_validation->set_rules('mensalista_data_nascimento', 'Data nascimento', 'required');
                 $this->form_validation->set_rules('mensalista_cpf', 'CPF', 'trim|required|exact_length[14]|is_unique[mensalistas.mensalista_cpf]|callback_valida_cpf');
                 $this->form_validation->set_rules('mensalista_rg', 'RG', 'trim|required|min_length[7]|max_length[14]|is_unique[mensalistas.mensalista_rg]');
+                $this->form_validation->set_rules('mensalista_cnpj', 'CNPJ', 'trim|exact_length[18]');
                 $this->form_validation->set_rules('mensalista_email', 'E-mail', 'trim|required|valid_email|max_length[50]|is_unique[mensalistas.mensalista_email]');
                 $mensalista_telefone_fixo =$this->input->post('mensalista_telefone_fixo');
                 if(!empty($mensalista_telefone_fixo)){
@@ -73,6 +74,7 @@ class Mensalistas extends CI_Controller{
                         'mensalista_data_nascimento',
                         'mensalista_cpf',
                         'mensalista_rg',
+                        'mensalista_cnpj',
                         'mensalista_email',
                         'mensalista_telefone_fixo',
                         'mensalista_telefone_movel',
@@ -129,6 +131,7 @@ class Mensalistas extends CI_Controller{
                 $this->form_validation->set_rules('mensalista_data_nascimento', 'Data nascimento', 'required');
                 $this->form_validation->set_rules('mensalista_cpf', 'CPF', 'trim|required|exact_length[14]|callback_valida_cpf');
                 $this->form_validation->set_rules('mensalista_rg', 'RG', 'trim|required|min_length[7]|max_length[14]|callback_check_rg');
+                $this->form_validation->set_rules('mensalista_cnpj', 'CNPJ', 'trim|exact_length[18]');
                 $this->form_validation->set_rules('mensalista_email', 'E-mail', 'trim|required|valid_email|max_length[50]|callback_check_email');
                 $mensalista_telefone_fixo =$this->input->post('mensalista_telefone_fixo');
                 if(!empty($mensalista_telefone_fixo)){
@@ -174,7 +177,7 @@ class Mensalistas extends CI_Controller{
                         if($this->db->table_exists('mensalidades')) {
 
                             if($this->core_model->get_by_id('mensalidades', array('mensalidade_mensalista_id' => $mensalista_id, 'mensalidade_status' => 0))) {
-                                $this->session->set_flashdata('error', 'Ação não permitida: Este mensalista não pode ser desativado porque existem mensalidades em aberto.');
+                                $this->session->set_flashdata('error', 'Ação não permitida: Este mensalista não pode ser desativado porque existe &nbsp; <i class="fas fa-hand-holding-usd"></i> &nbsp; Mensalidade em aberto.');
                                 redirect($this->router->fetch_class());
                             }
                         }
@@ -188,6 +191,7 @@ class Mensalistas extends CI_Controller{
                         'mensalista_data_nascimento',
                         'mensalista_cpf',
                         'mensalista_rg',
+                        'mensalista_cnpj',
                         'mensalista_email',
                         'mensalista_telefone_fixo',
                         'mensalista_telefone_movel',
