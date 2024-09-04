@@ -103,8 +103,11 @@
                                         <td class="text-right">
 
                                         <div class="d-flex">
-                                            <a data-toggle="tooltip" data-placement="bottom" title="Editar <?php echo $this->router->fetch_class(); ?>" href="<?php echo base_url($this->router->fetch_class().'/core/'.$mensalidade->mensalidade_id); ?>" class="btn btn-primary mr-2 d-inline-block">
-                                                <i class="ik ik-edit-2"></i>Editar
+
+                                            <a data-toggle="tooltip" data-placement="bottom" title="<?php echo ($mensalidade-> mensalidade_status == 1 ? 'Visualizar'  
+                                            : 'Editar' ) ?> <?php echo $this->router->fetch_class(); ?>" href="<?php echo base_url($this->router->fetch_class().'/core/'.$mensalidade->mensalidade_id); ?>" class="btn btn-primary mr-2 d-inline-block">
+                                    
+                                                <?php echo ($mensalidade-> mensalidade_status == 1 ? '<i class="ik ik-eye"></i> Visualizar': '<i class="ik ik-edit-2"></i> Editar' ) ?>
                                             </a> 
 
                                             <button type="button" title="Excluir <?php echo $this->router->fetch_class(); ?>" class="btn btn-danger d-inline-block" data-toggle="modal" data-target="#mensalidade-<?php echo $mensalidade->mensalidade_id; ?>">

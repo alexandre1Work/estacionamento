@@ -44,6 +44,7 @@ class Mensalidades extends CI_Controller{
 
         if(!$mensalidade_id) {
             //cadastrando...
+
         } else {
 
             if(!$this->core_model->get_by_id('mensalidades', array('mensalidade_id' => $mensalidade_id))) {
@@ -52,38 +53,73 @@ class Mensalidades extends CI_Controller{
 
             } else {
 
-                $data = array(
-                    'titulo' => 'Editar mensalidade',
-                    'sub_titulo' => 'Chegou a hora de editar a mensalidade',
-                    'icone_view' => 'fas fa-hand-holding-usd',
-                    'texto_modal' => 'Os dados estão corretos? <br><br> Depois de salva só será possível alterar a "CATEGORIA DO VEÍCULO"',
-                    'styles' => array(
-                        'plugins/select2/dist/css/select2.min.css',
-                    ),
-                    'scripts' => array(
-                        'plugins/mask/jquery.mask.min.js',
-                        'plugins/mask/custom.js',
-                        'plugins/select2/dist/js/select2.min.js',
-                        'plugins/select2/dist/js/select2.min.js',
-                        'js/mensalidades/mensalidades.js',
-                    ),
+                $this->form_validation->set_rules('mensalidade_precificacao_id','Categoria','required');
 
-                    'precificacoes' => $this->core_model->get_all('precificacoes', array('precificacao_ativa' => 1)),
-                    'mensalistas' => $this->core_model->get_all('mensalistas', array('mensalista_ativo' => 1)),
-                    
+                if ($this->form_validation->run()){
 
-                    'mensalidade' => $this->core_model->get_by_id('mensalidades', array('mensalidade_id' => $mensalidade_id)),
-                );
-        
-                // echo '<pre>';
-                // print_r ($data['mensalidades']);
-                // exit();
-        
-                $this->load->view('layout/header', $data);
-                $this->load->view('mensalidades/core');
-                $this->load->view('layout/footer');
+                    /* Array
+                    ( 
+                        [mensalidade_mensalista_dia_vencimento] => 5
+                        [mensalidade_precificacao_id] => 1 130,00
+                        [mensalidade_valor_mensalidade] => 130,00
+                        [mensalidade_status] => 0
+                        [mensalidade_id] => 1
+                        [mensalidade_mensalista_hidden_id] => 1
+                        [mensalidade_precificacao_hidden_id] => 1
+                    ) */
+
+                    $data = elements(
+                        array(
+                            'mensalidade_precificacao_id',
+                            'mensalidade_valor_mensalidade',
+                            'mensalidade_mensalista_dia_vencimento',
+                            'mensalidade_status',
+                        ), $this->input->post()
+                    );
+
+                    $data['mensalidade_mensalista_id'] = $this->input->post('mensalidade_mensalista_hidden_id');
+
+                    $data['mensalidade_precificacao_id'] = $this->input->post('mensalidade_precificacao_hidden_id');
+
+                    if ($data['mensalidade_status']==1) {
+
+                        $data['mensalidade_data_pagamento'] = date('Y-m-d H:i:s');
+                    }
+
+                    $data = html_escape($data);
+
+                    $this->core_model->update('mensalidades',$data, array('mensalidade_id' => $mensalidade_id));
+                    redirect($this->router->fetch_class());
+
+                } else {
+                    //erro de validação
+                    $data = array(
+                        'titulo' => 'Editar mensalidade',
+                        'sub_titulo' => 'Chegou a hora de editar a mensalidade',
+                        'icone_view' => 'fas fa-hand-holding-usd',
+                        'texto_modal' => 'Os dados estão corretos? <br><br> Depois de salva só será possível alterar a "CATEGORIA" e a "SITUAÇÃO"',
+                        'styles' => array(
+                            'plugins/select2/dist/css/select2.min.css',
+                        ),
+                        'scripts' => array(
+                            'plugins/mask/jquery.mask.min.js',
+                            'plugins/mask/custom.js',
+                            'plugins/select2/dist/js/select2.min.js',
+                            'plugins/select2/dist/js/select2.min.js',
+                            'js/mensalidades/mensalidades.js',
+                        ),
+    
+                        'precificacoes' => $this->core_model->get_all('precificacoes', array('precificacao_ativa' => 1)),
+                        'mensalistas' => $this->core_model->get_all('mensalistas', array('mensalista_ativo' => 1)),
+                        
+                        'mensalidade' => $this->core_model->get_by_id('mensalidades', array('mensalidade_id' => $mensalidade_id)),
+                    );
+            
+                    $this->load->view('layout/header', $data);
+                    $this->load->view('mensalidades/core');
+                    $this->load->view('layout/footer');
+                }
             }
-
         }
     }
 }
