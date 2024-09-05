@@ -5,6 +5,10 @@ defined('BASEPATH') or exit('Ação não permitida');
 
 function formata_data_banco_com_hora($string) {
 
+    if (empty($string)) {
+        // Lidar com o caso em que $string está vazio ou nulo
+        return ''; // ou algum valor padrão
+    }
     $dia_sem = date('w', strtotime($string));
 
     if ($dia_sem == 0) {
@@ -35,6 +39,10 @@ function formata_data_banco_com_hora($string) {
 
 function formata_data_banco_sem_hora($string) {
 
+    if (empty($string)) {
+        // Lidar com o caso em que $string está vazio ou nulo
+        return ''; // ou algum valor padrão
+    }
     $dia_sem = date('w', strtotime($string));
 
     if ($dia_sem == 0) {
