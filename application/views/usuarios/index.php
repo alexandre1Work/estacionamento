@@ -93,16 +93,16 @@
                                         <td><?php echo ($this->ion_auth->is_admin($user->id) ? 'Administrador' : 'Atendente'); ?></td>
                                         <td><?php echo ($user->active == 1 ? '<span class="badge badge-pill badge-success mb-1"> 
                                         <i class="fas fa-lock-open"></i> &nbsp;Sim</span>' : '<span class="badge badge-pill badge-warning mb-1"> <i class="fas fa-lock"></i> &nbsp;Não</span>'); ?></td>
-                                        <td class="text-right">
-                                        <a data-toggle="tooltip" data-placement="bottom" title="Editar <?php echo $this->router->fetch_class(); ?>" href="<?php echo base_url($this->router->fetch_class().'/core/'.$user->id); ?>" class="btn btn-primary">
-                                            <i class="ik ik-edit-2"></i>Editar
-                                        </a> 
+                                        <td class="text-center">
+                                            <a data-toggle="tooltip" data-placement="bottom" title="Editar <?php echo $this->router->fetch_class(); ?>" href="<?php echo base_url($this->router->fetch_class().'/core/'.$user->id); ?>" class="btn btn-primary mr-1">
+                                                <i class="ik ik-edit-2"></i>Editar
+                                            </a> 
 
-                                        <button type="button" title="Excluir <?php echo $this->router->fetch_class(); ?> " class="btn btn-danger" data-toggle="modal" 
-                                        data-target="#user-<?php echo $user->id; ?>">
-                                            <i class="ik ik-trash-2"></i>Excluir
-                                        </button> 
-
+                                            <button type="button" title="Excluir <?php echo $this->router->fetch_class(); ?> " class="btn btn-danger" data-toggle="modal" 
+                                            data-target="#user-<?php echo $user->id; ?>">
+                                                <i class="ik ik-trash-2"></i>Excluir
+                                            </button> 
+                                        </td>
                                     </tr>
 
                                     <div class="modal fade" id="user-<?php echo $user->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">

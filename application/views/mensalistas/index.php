@@ -93,17 +93,19 @@
 
                                         <td><?php echo ($mensalista->mensalista_ativo == 1 ? '<span class="badge badge-pill badge-success mb-1"> 
                                         <i class="fas fa-lock-open"></i> &nbsp;Sim</span>' : '<span class="badge badge-pill badge-warning mb-1"> <i class="fas fa-lock"></i> &nbsp;Não</span>'); ?></td>
-                                        <td class="text-right">
+                                        
+                                        <td>
+                                            <div class="d-flex justify-content-center">
+                                                <a data-toggle="tooltip" data-placement="bottom" title="Editar <?php echo $this->router->fetch_class(); ?>" href="<?php echo base_url($this->router->fetch_class().'/core/'.$mensalista->mensalista_id); ?>" class="btn btn-primary mr-2">
+                                                    <i class="ik ik-edit-2"></i>Editar
+                                                </a> 
 
-                                        <a data-toggle="tooltip" data-placement="bottom" title="Editar <?php echo $this->router->fetch_class(); ?>" href="<?php echo base_url($this->router->fetch_class().'/core/'.$mensalista->mensalista_id); ?>" class="btn btn-primary">
-                                            <i class="ik ik-edit-2"></i>Editar
-                                        </a> 
-
-                                        <button type="button" title="Excluir <?php echo $this->router->fetch_class(); ?> " class="btn btn-danger" data-toggle="modal" 
-                                        data-target="#mensalista-<?php echo $mensalista->mensalista_id; ?>">
-                                            <i class="ik ik-trash-2"></i>Excluir
-                                        </button> 
-
+                                                <button type="button" title="Excluir <?php echo $this->router->fetch_class(); ?> " class="btn btn-danger" data-toggle="modal" 
+                                                data-target="#mensalista-<?php echo $mensalista->mensalista_id; ?>">
+                                                    <i class="ik ik-trash-2"></i>Excluir
+                                                </button> 
+                                            </div>
+                                        </td>
                                     </tr>
 
                                     <div class="modal fade" id="mensalista-<?php echo $mensalista->mensalista_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">

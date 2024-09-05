@@ -114,7 +114,6 @@
                                                 </button> 
                                             </div>
                                         </td>
-
                                     </tr>
 
                                     <div class="modal fade" id="mensalidade-<?php echo $mensalidade->mensalidade_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
