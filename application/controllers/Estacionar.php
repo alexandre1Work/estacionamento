@@ -85,8 +85,11 @@ class Estacionar extends CI_Controller{
 
                 $data = html_escape($data);
 
-                $this->core_model->insert('estacionar', $data);
-                redirect($this->router->fetch_class());
+                $this->core_model->insert('estacionar', $data, TRUE);
+
+                $estacionar_id = $this->session->userdata('last_id');
+
+                redirect($this->router->fetch_class() . '/acoes/' . $estacionar_id);
 
                 //criar método imprimir
 
@@ -113,7 +116,7 @@ class Estacionar extends CI_Controller{
                 // exit();
         
                 $this->load->view('layout/header', $data);
-                $this->load->view('estacionar/core');
+                $this->load->view('estacionar/acoes');
                 $this->load->view('layout/footer');
             }
 
@@ -166,7 +169,8 @@ class Estacionar extends CI_Controller{
                     $data = html_escape($data);
 
                     $this->core_model->update('estacionar', $data, array('estacionar_id' => $estacionar_id));
-                    redirect($this->router->fetch_class());
+
+                    redirect($this->router->fetch_class() . '/acoes/' . $estacionar_id);
 
                     //criar método imprimir
 
@@ -195,7 +199,7 @@ class Estacionar extends CI_Controller{
                     // exit();
             
                     $this->load->view('layout/header', $data);
-                    $this->load->view('estacionar/core');
+                    $this->load->view('estacionar/acoes');
                     $this->load->view('layout/footer');
                 }
             }
@@ -253,5 +257,34 @@ class Estacionar extends CI_Controller{
 
             return TRUE;
         }
+    }
+
+    public function acoes($estacionar_id = NULL) {
+
+        if (!$this->core_model->get_by_id('estacionar', array('estacionar_id' => $estacionar_id))) {
+            $this->session->set_flashdata('error', 'Ticket não encontrado');
+            redirect($this->router->fetch_class());
+        }else{
+
+            $data = array(
+                'titulo' => 'O que você gostaria de fazer?',
+                'sub_titulo' => 'Por favor, escolha uma das opções a seguir',
+                'icone_view' => 'fas fa-question',
+
+                'estacionado' => $this->core_model->get_by_id('estacionar', array('estacionar_id' => $estacionar_id)),
+            );
+    
+            // echo '<pre>';
+            // print_r ($data['estacionados']);
+            // exit();
+    
+            $this->load->view('layout/header', $data);
+            $this->load->view('estacionar/acoes');
+            $this->load->view('layout/footer');
+
+
+
+        }
+
     }
 }
