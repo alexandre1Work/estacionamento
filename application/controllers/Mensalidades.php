@@ -107,7 +107,6 @@ class Mensalidades extends CI_Controller{
                         'plugins/mask/jquery.mask.min.js',
                         'plugins/mask/custom.js',
                         'plugins/select2/dist/js/select2.min.js',
-                        'plugins/select2/dist/js/select2.min.js',
                         'js/mensalidades/mensalidades.js',
                     ),
 

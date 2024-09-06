@@ -39,4 +39,42 @@ class Estacionar extends CI_Controller{
         $this->load->view('estacionar/index');
         $this->load->view('layout/footer');
     }
+
+    public function core($estacionar_id = NULL) {
+
+        if(!$estacionar_id){
+            //cadastrando
+        }else{
+            if (!$this->core_model->get_by_id('estacionar', array('estacionar_id' => $estacionar_id))) {
+                $this->session->set_flashdata('error', 'Ticket não encontrado para encerramento');
+                redirect($this->router->fetch_class());
+            }else{
+                //encerramento do ticket
+                $data = array(
+                    'titulo' => 'Encerrando ticket',
+                    'sub_titulo' => 'Chegou a hora de encerrar o ticket de estacionamento',
+                    'icone_view' => 'fas fa-parking',
+                    'texto_modal' => 'Tem certeza que deseja encerrar este Ticket?',
+                    'scripts' => array(
+                        'plugins/mask/jquery.mask.min.js',
+                        'plugins/mask/custom.js',
+                        'js/estacionar/estacionar.js'
+                    ),
+                    'estacionado' => $this->core_model->get_by_id('estacionar', array('estacionar_id' => $estacionar_id)),
+
+                    'precificacoes' => $this->core_model->get_all('precificacoes', array('precificacao_ativa' => 1)),
+
+                    'formas_pagamentos' => $this->core_model->get_all('formas_pagamentos', array('forma_pagamento_ativa' => 1)),
+                );
+        
+                // echo '<pre>';
+                // print_r ($data['estacionados']);
+                // exit();
+        
+                $this->load->view('layout/header', $data);
+                $this->load->view('estacionar/core');
+                $this->load->view('layout/footer');
+            }
+        }
+    }
 }
