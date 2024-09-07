@@ -140,6 +140,31 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header d-block text-center">Situação Vagas</div>
+                        <div class="card-body">
+                                        
+                            <div class="col-lg-2 col-md-4 col-6">
+                                <p class="text-center">Veículo pequeno</p>
+
+                                <div class="widget social-widget">
+                                    <div class="widget-body text-center">
+                                        <div class="content">
+                                            <i class="fas fa-car fa-3x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
