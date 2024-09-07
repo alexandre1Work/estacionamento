@@ -1,5 +1,9 @@
 <?php
 
+    //referenciar o namespace Dompdf
+    use Dompdf\Dompdf;
+
+
 defined('BASEPATH') OR exit('Ação não permitida');
 
 class Estacionar extends CI_Controller{
@@ -289,92 +293,81 @@ class Estacionar extends CI_Controller{
 
     public function pdf($estacionar_id = NULL) {
         if (!$estacionar_id || !$this->core_model->get_by_id('estacionar', array('estacionar_id' => $estacionar_id))) {
-            $this->session->set_flashdata('error', 'Ticket não encontrado para empressão');
+            $this->session->set_flashdata('error', 'Ticket não encontrado para impressão');
             redirect($this->router->fetch_class());
-        }else{
-
-            $this->load->library('pdf');
+        } else {
+            // Carregar o helper de PDF
+            $this->load->helper('pdf');
             $this->load->model('estacionar_model');
-
+    
             $empresa = $this->core_model->get_by_id('sistema', array('sistema_id' => 1));
-
             $ticket = $this->estacionar_model->get_by_id($estacionar_id);
-
-
-
+    
             $file_name = 'Ticket - Placa_' . $ticket->estacionar_placa_veiculo;
-
+    
             $html = '<html style="font-size: 12px;">';
-
+    
             $html .= '<head>';
-
-            $html .= '<title>'.$empresa->sistema_razao_social.'</title>';
-
+            $html .= '<title>' . $empresa->sistema_razao_social . '</title>';
             $html .= '</head>';
-
+    
             $html .= '<body>';
-
-            /*Dados da empresa */
+    
+            /* Dados da empresa */
             $html .= '<h5 align="center" style="font-size: 16px;">
-                '. $empresa->sistema_nome_fantasia . '<br/> <br/>
-                CNPJ:&nbsp;'.$empresa->sistema_cnpj . '<br/>' .$empresa->sistema_endereco. ' - ' . $empresa->sistema_numero . '<br/>
-                '. 'CEP:&nbsp;' .$empresa->sistema_cep . '<br/>
-                ' .$empresa->sistema_cidade . '<br/>
-                ' .$empresa->sistema_telefone_fixo. ' -- ' . $empresa->sistema_telefone_movel . '<br/>
-                '.$empresa->sistema_email . '<br/>
+                ' . $empresa->sistema_nome_fantasia . '<br/> <br/>
+                CNPJ:&nbsp;' . $empresa->sistema_cnpj . '<br/>' . $empresa->sistema_endereco . ' - ' . $empresa->sistema_numero . '<br/>
+                ' . 'CEP:&nbsp;' . $empresa->sistema_cep . '<br/>
+                ' . $empresa->sistema_cidade . '<br/>
+                ' . $empresa->sistema_telefone_fixo . ' -- ' . $empresa->sistema_telefone_movel . '<br/>
+                ' . $empresa->sistema_email . '<br/>
                 </h5>';
-
-
+    
             $html .= '<hr>';
-
+    
             $dados_saida = '';
-
-            if($ticket->estacionar_status == 1){
-
-                $dados_saida .= '<strong>Data saída:&nbsp;</strong>'.formata_data_banco_com_hora($ticket->estacionar_data_saida).'</br>'
-                .'<strong>Tempo decorrido (hr:mn):&nbsp;</strong>'.$ticket->estacionar_tempo_decorrido.'</br>'
-                .'<strong>Valor pago:&nbsp;</strong>'.'R$ &nbsp;'.$ticket->estacionar_valor_devido.'</br>'
-                .'<strong>Forma de pagamento:&nbsp;</strong>'.$ticket->forma_pagamento_nome.'</br>';
+    
+            if ($ticket->estacionar_status == 1) {
+                $dados_saida .= '<strong>Data saída:&nbsp;</strong>' . formata_data_banco_com_hora($ticket->estacionar_data_saida) . '</br>'
+                    . '<strong>Tempo decorrido (hr:mn):&nbsp;</strong>' . $ticket->estacionar_tempo_decorrido . '</br>'
+                    . '<strong>Valor pago:&nbsp;</strong>' . 'R$ &nbsp;' . $ticket->estacionar_valor_devido . '</br>'
+                    . '<strong>Forma de pagamento:&nbsp;</strong>' . $ticket->forma_pagamento_nome . '</br>';
             }
-
-            //dados do ticket
-            $html .= '<p align="right"> Ticket N°:'.$ticket->estacionar_id.'</p> <br/>';
-
+    
+            // Dados do ticket
+            $html .= '<p align="right"> Ticket N°:' . $ticket->estacionar_id . '</p> <br/>';
+    
             $html .= '<p>'
-                .'<strong>Placa veículo:&nbsp;</strong>'.$ticket->estacionar_placa_veiculo.'</br>'
-                .'<strong>Marca veículo:&nbsp;</strong>'.$ticket->estacionar_marca_veiculo.'</br>'
-                .'<strong>Modelo veículo:&nbsp;</strong>'.$ticket->estacionar_modelo_veiculo.'</br>'
-                .'<strong>Categoria veículo:&nbsp;</strong>'.$ticket->precificacao_categoria.'</br>'
-                .'<strong>Número da vaga:&nbsp;</strong>'.$ticket->estacionar_numero_vaga.'</br>'
-                .'<strong>Data entrada:&nbsp;</strong>'.formata_data_banco_com_hora($ticket->estacionar_data_entrada).'</br>'
-                .$dados_saida
-                .'</p>';
-
-        
+                . '<strong>Placa veículo:&nbsp;</strong>' . $ticket->estacionar_placa_veiculo . '</br>'
+                . '<strong>Marca veículo:&nbsp;</strong>' . $ticket->estacionar_marca_veiculo . '</br>'
+                . '<strong>Modelo veículo:&nbsp;</strong>' . $ticket->estacionar_modelo_veiculo . '</br>'
+                . '<strong>Categoria veículo:&nbsp;</strong>' . $ticket->precificacao_categoria . '</br>'
+                . '<strong>Número da vaga:&nbsp;</strong>' . $ticket->estacionar_numero_vaga . '</br>'
+                . '<strong>Data entrada:&nbsp;</strong>' . formata_data_banco_com_hora($ticket->estacionar_data_entrada) . '</br>'
+                . $dados_saida
+                . '</p>';
+    
             $html .= '<br/>';
-
+    
             $html .= '<hr>';
-
+    
             $html .= '<h5 align="center" style="font-size: 16px;">
-            '. $empresa->sistema_nome_fantasia . '<br/> <br/>
-            '.$empresa->sistema_texto_ticket . '<br/> <br/>
-            '.date('d/m/Y H:i:s'). '<br/>
+            ' . $empresa->sistema_nome_fantasia . '<br/> <br/>
+            ' . $empresa->sistema_texto_ticket . '<br/> <br/>
+            ' . date('d/m/Y H:i:s') . '<br/>
             </h5>';
-
-
-            // False -> Abre no navegador
-            // True -> Faz o download
-
-            // echo '<prev>';
-            // print_r($html);
-            // exit();
-
-            $this->pdf->createPDF($html, $file_name, false);
-
-            $html .= '</html>';
-
+    
             $html .= '</body>';
-
+            $html .= '</html>';
+    
+            // Chamar a função para gerar o PDF
+            gerar_pdf($html, $file_name, false);
+            
+            // Evitar a execução do restante do código
+            exit;
         }
     }
+    
+    
+
 }
