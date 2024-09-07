@@ -99,7 +99,7 @@
                                                 <a data-toggle="tooltip" data-placement="bottom" title="<?php echo ($estacionado-> estacionar_status == 1 ? 'Visualizar'  
                                                 : 'Encerrar' ) ?> ticket" href="<?php echo base_url($this->router->fetch_class().'/core/'.$estacionado->estacionar_id); ?>" class="btn btn-primary mr-2 d-inline-block">
                                         
-                                                    <?php echo ($estacionado-> estacionar_status == 1 ? '<i class="ik ik-eye"></i> Visualizar': '<i class="ik ik-edit-2"></i> Editar' ) ?>
+                                                    <?php echo ($estacionado-> estacionar_status == 1 ? '<i class="ik ik-eye"></i> Visualizar': '<i class="ik ik-edit-2"></i> Encerrar' ) ?>
                                                 </a> 
 
                                                 <button type="button" title="Excluir <?php echo $this->router->fetch_class(); ?>" class="btn btn-danger d-inline-block" data-toggle="modal" data-target="#estacionado-<?php echo $estacionado->estacionar_id; ?>">
