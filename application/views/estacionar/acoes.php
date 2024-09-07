@@ -55,7 +55,7 @@
                             <div class="row align-items-center">
                                 <div class="col">
                                     <h6 class="mb-25">Impressão do ticket</h6>
-                                    <a class="btn bg-blue text-white" href="<?php echo base_url($this->router->fetch_class() . '/pdf/' . $estacionado->estacionar_id); ?>">Imprimir</a>
+                                    <a target="_blank" class="btn bg-blue text-white" href="<?php echo base_url($this->router->fetch_class() . '/pdf/' . $estacionado->estacionar_id); ?>">Imprimir</a>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-print bg-blue"></i>

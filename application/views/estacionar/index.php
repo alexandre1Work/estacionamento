@@ -96,6 +96,9 @@
 
                                         <td class="text-right">
                                             <div class="d-flex justify-content-center">
+                                                
+                                                <a data-toggle="tooltip" data-placement="bottom" title="Imprimir ticket" target="_blank" class="btn bg-blue text-white mr-2 d-inline-block" href="<?php echo base_url($this->router->fetch_class() . '/pdf/' . $estacionado->estacionar_id); ?>"><i class="fas fa-print bg-blue "></i>Imprimir</a>
+
                                                 <a data-toggle="tooltip" data-placement="bottom" title="<?php echo ($estacionado-> estacionar_status == 1 ? 'Visualizar'  
                                                 : 'Encerrar' ) ?> ticket" href="<?php echo base_url($this->router->fetch_class().'/core/'.$estacionado->estacionar_id); ?>" class="btn btn-primary mr-2 d-inline-block">
                                         

@@ -52,7 +52,7 @@ class Estacionar extends CI_Controller{
             $this->form_validation->set_rules('estacionar_precificacao_id','Categoria','required');
             $this->form_validation->set_rules('estacionar_numero_vaga','Número da vaga','required|integer|greater_than[0]|callback_check_range_vagas_categoria|callback_check_vaga_ocupada');
 
-            $this->form_validation->set_rules('estacionar_placa_veiculo','Placa veículo','required|exact_length[8]|callback_check_placa_status_aberta');
+            $this->form_validation->set_rules('estacionar_placa_veiculo','Placa veículo','required|exact_length[8]|callback_check_placa_status_aberta|callback_to_uppercase');
 
             $this->form_validation->set_rules('estacionar_marca_veiculo','Marca veículo','required|min_length[2]|max_length[30]');
             $this->form_validation->set_rules('estacionar_modelo_veiculo','Modelo veículo','required|min_length[2]|max_length[20]');
@@ -97,8 +97,6 @@ class Estacionar extends CI_Controller{
 
                 redirect($this->router->fetch_class() . '/acoes/' . $estacionar_id);
 
-                //criar método imprimir
-
             } else {
 
                 //erro de validação
@@ -139,6 +137,8 @@ class Estacionar extends CI_Controller{
                 //torna a forma de pag obg se o tempo for > que 15min
                 if ($estacionar_tempo_decorrido > '015') {
                     $this->form_validation->set_rules('estacionar_forma_pagamento_id', 'Forma de pagamento', 'required');
+                }else{
+                    $this->form_validation->set_rules('estacionar_forma_pagamento_id', 'Forma de pagamento', 'trim');
                 }
 
 
@@ -368,6 +368,25 @@ class Estacionar extends CI_Controller{
         }
     }
     
-    
+    public function del($estacionar_id = NULL) {
+        if (!$estacionar_id || !$this->core_model->get_by_id('estacionar', array('estacionar_id' => $estacionar_id))) {
+            $this->session->set_flashdata('error', 'Ticket não encontrado para exclusão');
+            redirect($this->router->fetch_class());
+        }
 
+        if ($this->core_model->get_by_id('estacionar', array('estacionar_id' => $estacionar_id, 'estacionar_status' => 0))) {
+            $this->session->set_flashdata('error', 'Este ticket não pode ser excluído pois ainda está aberto');
+            redirect($this->router->fetch_class());
+        }
+
+        $this->core_model->delete('estacionar', array('estacionar_id' => $estacionar_id));
+        redirect($this->router->fetch_class());        
+    }
+
+    public function to_uppercase($str) {
+        // Converte a string para maiúsculas
+        $this->input->post('estacionar_placa_veiculo', true);
+        return strtoupper($str);
+    }
+    
 }
