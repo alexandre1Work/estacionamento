@@ -34,10 +34,18 @@ class Estacionar extends CI_Controller{
                 'plugins/datatables.net/js/estacionamento.js',
             ),
             'estacionados' => $this->estacionar_model->get_all(),
+
+            /*
+            Inicio numero vagas por categoria
+            */
+            'numero_vagas_pequeno' => $this->estacionar_model->get_numero_vagas(1), //veiculo p
+            'numero_vagas_medio' => $this->estacionar_model->get_numero_vagas(2), //veiculo m
+            'numero_vagas_grande' => $this->estacionar_model->get_numero_vagas(4), //veiculo m
+            'numero_vagas_moto' => $this->estacionar_model->get_numero_vagas(5), //veiculo m
         );
 
         // echo '<pre>';
-        // print_r ($data['estacionados']);
+        // print_r ($data['numero_vagas_pequeno']);
         // exit();
 
         $this->load->view('layout/header', $data);
