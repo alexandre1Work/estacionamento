@@ -152,7 +152,7 @@
                         <div class="card-body">        
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 col-6">
-                                    <p class="text-center text-uppercase small">Veículo pequeno</p>
+                                    <p class="text-center text-uppercase small">Veículo pequeno <?php echo ($numero_vagas_pequeno->precificacao_ativa == 0 ? '<br><span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-ban"></i>&nbsp;Desativada</span>' : ''); ?></p>
 
                                     <div class="widget social-widget">
                                         <div class="widget-body text-center">
@@ -193,10 +193,12 @@
 
                                                         <?php else: ?>
 
-                                                        <div class="widget social-widget bg-success vaga">
+                                                        <div class="widget social-widget <?php echo ($numero_vagas_pequeno->precificacao_ativa == 0 ? 'bg-secondary' : 'bg-success'); ?> vaga">
                                                             <div class="widget-body">
-                                                                <div class="content">
-                                                                    <div class="number"><?php echo $i; ?></div>
+                                                                <div data-toggle="tooltip" data-placement="bottom" title="<?php echo ($numero_vagas_pequeno->precificacao_ativa == 0 ? '' : 'Livre'); ?>" class="content">
+                                                                    <div class="number">
+                                                                    <?php echo ($numero_vagas_pequeno->precificacao_ativa == 0 ? '-' : $i); ?>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div> 
@@ -213,7 +215,7 @@
                                 </div>
 
                                 <div class="col-lg-3 col-md-4 col-6">
-                                    <p class="text-center text-uppercase small">Veículo médio</p>
+                                    <p class="text-center text-uppercase small">Veículo médio <?php echo ($numero_vagas_medio->precificacao_ativa == 0 ? '<br><span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-ban"></i>&nbsp;Desativada</span>' : ''); ?></p>
 
                                     <div class="widget social-widget">
                                         <div class="widget-body text-center">
@@ -252,10 +254,12 @@
 
                                                         <?php else: ?>
 
-                                                        <div class="widget social-widget bg-success vaga">
+                                                        <div class="widget social-widget <?php echo ($numero_vagas_medio->precificacao_ativa == 0 ? 'bg-secondary' : 'bg-success'); ?> vaga">
                                                             <div class="widget-body">
-                                                                <div class="content">
-                                                                    <div class="number"><?php echo $i; ?></div>
+                                                                <div data-toggle="tooltip" data-placement="bottom" title="<?php echo ($numero_vagas_medio->precificacao_ativa == 0 ? '' : 'Livre'); ?>" class="content">
+                                                                    <div class="number">
+                                                                    <?php echo ($numero_vagas_medio->precificacao_ativa == 0 ? '-' : $i); ?>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div> 
@@ -272,7 +276,7 @@
                                 </div>
 
                                 <div class="col-lg-3 col-md-4 col-6">
-                                    <p class="text-center text-uppercase small">Veículo grande</p>
+                                    <p class="text-center text-uppercase small">Veículo grande <?php echo ($numero_vagas_grande->precificacao_ativa == 0 ? '<br><span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-ban"></i>&nbsp;Desativada</span>' : ''); ?></p>
 
                                     <div class="widget social-widget">
                                         <div class="widget-body text-center">
@@ -288,7 +292,7 @@
                                                 $ocupadas = array(); //armazena as vagas
                                                 $placas = array(); //armazena as placas
 
-                                                foreach($vagas_ocupadas_medio as $vaga) {
+                                                foreach($vagas_ocupadas_grande as $vaga) {
                                                     
                                                     $ocupadas[] = $vaga->estacionar_numero_vaga;
                                                     $placas[$vaga->estacionar_numero_vaga] = $vaga->estacionar_placa_veiculo;
@@ -311,10 +315,12 @@
 
                                                         <?php else: ?>
 
-                                                        <div class="widget social-widget bg-success vaga">
+                                                            <div class="widget social-widget <?php echo ($numero_vagas_grande->precificacao_ativa == 0 ? 'bg-secondary' : 'bg-success'); ?> vaga">
                                                             <div class="widget-body">
-                                                                <div class="content">
-                                                                    <div class="number"><?php echo $i; ?></div>
+                                                                <div data-toggle="tooltip" data-placement="bottom" title="<?php echo ($numero_vagas_grande->precificacao_ativa == 0 ? '' : 'Livre'); ?>" class="content">
+                                                                    <div class="number">
+                                                                    <?php echo ($numero_vagas_grande->precificacao_ativa == 0 ? '-' : $i); ?>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div> 
@@ -331,7 +337,7 @@
                                 </div>
 
                                 <div class="col-lg-3 col-md-4 col-6">
-                                    <p class="text-center text-uppercase small">Veículo moto</p>
+                                    <p class="text-center text-uppercase small">Veículo moto <?php echo ($numero_vagas_moto->precificacao_ativa == 0 ? '<br><span class="text-danger font-weight-bold">&nbsp;<i class="fas fa-ban"></i>&nbsp;Desativada</span>' : ''); ?></p>
 
                                     <div class="widget social-widget">
                                         <div class="widget-body text-center">
@@ -370,10 +376,12 @@
 
                                                         <?php else: ?>
 
-                                                        <div class="widget social-widget bg-success vaga">
+                                                        <div class="widget social-widget <?php echo ($numero_vagas_moto->precificacao_ativa == 0 ? 'bg-secondary' : 'bg-success'); ?> vaga">
                                                             <div class="widget-body">
-                                                                <div class="content">
-                                                                    <div class="number"><?php echo $i; ?></div>
+                                                                <div data-toggle="tooltip" data-placement="bottom" title="<?php echo ($numero_vagas_moto->precificacao_ativa == 0 ? '' : 'Livre'); ?>" class="content">
+                                                                    <div class="number">
+                                                                    <?php echo ($numero_vagas_moto->precificacao_ativa == 0 ? '-' : $i); ?>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div> 

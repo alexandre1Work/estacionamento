@@ -200,5 +200,4 @@ class Precificacoes extends CI_Controller{
         redirect($this->router->fetch_class());
     }
 
-
 }
