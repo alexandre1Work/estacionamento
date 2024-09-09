@@ -144,7 +144,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header d-block text-center">Situação Vagas</div>
+                    <div class="card-header d-block text-center">
+                        <h5 class="text-lg font-weight-bold">Situação Vagas</h5>
+                        <p class="font-weight-light" style="font-size: 0.9rem;">Passe o mouse sobre a vaga ocupada para visualizar a placa do veículo</p>
+                    </div>
+
                         <div class="card-body">        
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 col-6">
@@ -159,16 +163,45 @@
 
                                         <div>
                                             <ul class="list-inline mt-15 text-center">
+
+                                                <?php 
+                                                
+                                                $ocupadas = array(); //armazena as vagas
+                                                $placas = array(); //armazena as placas
+
+                                                foreach($vagas_ocupadas_pequeno as $vaga) {
+                                                    
+                                                    $ocupadas[] = $vaga->estacionar_numero_vaga;
+                                                    $placas[$vaga->estacionar_numero_vaga] = $vaga->estacionar_placa_veiculo;
+                                                }
+
+                                                ?>
+
                                                 <?php for($i = 1; $i <= $numero_vagas_pequeno->vagas; $i++): ?>
                                             
                                                     <li class="list-inline-item">
+                                                        <?php if(in_array($i, $ocupadas)): ?>
+
+                                                        <div class="widget social-widget bg-warning vaga">
+                                                            <div class="widget-body">
+                                                                <div data-toggle="tooltip"    data-placement="bottom" title="<?php echo 'Placa: &nbsp;'.$placas[$i] ?>" class="content">
+                                                                    
+                                                                    <i class="fas fa-car fa-lg"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <?php else: ?>
+
                                                         <div class="widget social-widget bg-success vaga">
                                                             <div class="widget-body">
                                                                 <div class="content">
                                                                     <div class="number"><?php echo $i; ?></div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> 
+
+                                                        <?php endif; ?>
                                                     </li>
 
                                                 <?php endfor; ?>
@@ -191,16 +224,43 @@
 
                                         <div>
                                             <ul class="list-inline mt-15 text-center">
+
+                                                <?php 
+                                                $ocupadas = array(); //armazena as vagas
+                                                $placas = array(); //armazena as placas
+
+                                                foreach($vagas_ocupadas_medio as $vaga) {
+                                                    
+                                                    $ocupadas[] = $vaga->estacionar_numero_vaga;
+                                                    $placas[$vaga->estacionar_numero_vaga] = $vaga->estacionar_placa_veiculo;
+                                                }
+                                                ?>
+
                                                 <?php for($i = 1; $i <= $numero_vagas_medio->vagas; $i++): ?>
                                             
                                                     <li class="list-inline-item">
+                                                        <?php if(in_array($i, $ocupadas)): ?>
+
+                                                        <div class="widget social-widget bg-warning vaga">
+                                                            <div class="widget-body">
+                                                                <div data-toggle="tooltip"    data-placement="bottom" title="<?php echo 'Placa: &nbsp;'.$placas[$i] ?>" class="content">
+                                                                    
+                                                                    <i class="fas fa-truck-monster fa-lg"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <?php else: ?>
+
                                                         <div class="widget social-widget bg-success vaga">
                                                             <div class="widget-body">
                                                                 <div class="content">
                                                                     <div class="number"><?php echo $i; ?></div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> 
+
+                                                        <?php endif; ?>
                                                     </li>
 
                                                 <?php endfor; ?>
@@ -223,16 +283,43 @@
 
                                         <div>
                                             <ul class="list-inline mt-15 text-center">
+
+                                                <?php 
+                                                $ocupadas = array(); //armazena as vagas
+                                                $placas = array(); //armazena as placas
+
+                                                foreach($vagas_ocupadas_medio as $vaga) {
+                                                    
+                                                    $ocupadas[] = $vaga->estacionar_numero_vaga;
+                                                    $placas[$vaga->estacionar_numero_vaga] = $vaga->estacionar_placa_veiculo;
+                                                }
+                                                ?>
+
                                                 <?php for($i = 1; $i <= $numero_vagas_grande->vagas; $i++): ?>
                                             
                                                     <li class="list-inline-item">
+                                                        <?php if(in_array($i, $ocupadas)): ?>
+
+                                                        <div class="widget social-widget bg-warning vaga">
+                                                            <div class="widget-body">
+                                                                <div data-toggle="tooltip"    data-placement="bottom" title="<?php echo 'Placa: &nbsp;'.$placas[$i] ?>" class="content">
+                                                                    
+                                                                    <i class="fas fa-truck fa-lg"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <?php else: ?>
+
                                                         <div class="widget social-widget bg-success vaga">
                                                             <div class="widget-body">
                                                                 <div class="content">
                                                                     <div class="number"><?php echo $i; ?></div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> 
+
+                                                        <?php endif; ?>
                                                     </li>
 
                                                 <?php endfor; ?>
@@ -255,16 +342,43 @@
 
                                         <div>
                                             <ul class="list-inline mt-15 text-center">
+                                            
+                                                <?php 
+                                                $ocupadas = array(); //armazena as vagas
+                                                $placas = array(); //armazena as placas
+
+                                                foreach($vagas_ocupadas_moto as $vaga) {
+                                                    
+                                                    $ocupadas[] = $vaga->estacionar_numero_vaga;
+                                                    $placas[$vaga->estacionar_numero_vaga] = $vaga->estacionar_placa_veiculo;
+                                                }
+                                                ?>
+
                                                 <?php for($i = 1; $i <= $numero_vagas_moto->vagas; $i++): ?>
                                             
                                                     <li class="list-inline-item">
+                                                        <?php if(in_array($i, $ocupadas)): ?>
+
+                                                        <div class="widget social-widget bg-warning vaga">
+                                                            <div class="widget-body">
+                                                                <div data-toggle="tooltip"    data-placement="bottom" title="<?php echo 'Placa: &nbsp;'.$placas[$i] ?>" class="content">
+                                                                    
+                                                                    <i class="fas fa-motorcycle fa-lg"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <?php else: ?>
+
                                                         <div class="widget social-widget bg-success vaga">
                                                             <div class="widget-body">
                                                                 <div class="content">
                                                                     <div class="number"><?php echo $i; ?></div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> 
+
+                                                        <?php endif; ?>
                                                     </li>
 
                                                 <?php endfor; ?>
