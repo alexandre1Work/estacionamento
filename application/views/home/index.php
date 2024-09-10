@@ -72,10 +72,10 @@
                 </div>
                 <div class="col-xl-3 col-md-12">
                     <div class="card proj-t-card">
-                        <div class="card-body text-blue">
+                        <div class="card-body text-green">
                             <div class="row align-items-center mb-30">
                                 <div class="col-auto">
-                                    <i class="fas fa-hand-holding-usd f-30"></i>
+                                    <i class="fas fa-hand-holding-usd f-30" style="color: #25D366;"></i>
                                 </div>
                                 <div class="col pl-0">
                                     <h6 class="mb-5">Mensalidades</h6>
@@ -87,28 +87,28 @@
                             <div class="row align-items-center text-center">
                                 <div class="col">
                                     <span>Pagas</span>
-                                    <h6 class="mb-0 badge badge-pill badge-blue text-white">
+                                    <h6 class="mb-0 badge badge-pill text-white" style="background-color: #25D366;">
                                         <?php echo $total_mensalidades_pagas; ?>
                                     </h6>
                                 </div>
-                                <div class="col"><i class="fas fa-exchange-alt f-18"></i></div>
+                                <div class="col"><i class="fas fa-exchange-alt f-18" style="color: #25D366;"></i></div>
                                 <div class="col">
                                     <span>Abertas</span>
-                                    <h6 class="mb-0 badge badge-pill badge-blue text-white">
+                                    <h6 class="mb-0 badge badge-pill text-white" style="background-color: #25D366;">
                                         <?php echo $total_mensalidades_abertas; ?>
                                     </h6>
                                 </div>
                             </div>
-                            <h6 class="pt-badge bg-blue small">Park Cloud</h6>
+                            <h6 class="pt-badge small text-white" style="background-color: #25D366;">Park Cloud</h6>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-12">
                     <div class="card proj-t-card">
-                        <div class="card-body text-yellow">
+                        <div class="card-body text-purple">
                             <div class="row align-items-center mb-30">
                                 <div class="col-auto">
-                                    <i class="fas fa-money-bill-alt f-30"></i>
+                                    <i class="fas fa-money-bill-alt f-30" style="color: #5F259F;"></i>
                                 </div>
                                 <div class="col pl-0">
                                     <h6 class="mb-5">Avulsos</h6>
@@ -120,28 +120,28 @@
                             <div class="row align-items-center text-center">
                                 <div class="col">
                                     <span>Pagas</span>
-                                    <h6 class="mb-0 badge badge-pill badge-yellow text-white">
+                                    <h6 class="mb-0 badge badge-pill text-white" style="background-color: #5F259F;">
                                     <?php echo $total_avulsos_pagos; ?>
                                     </h6>
                                 </div>
-                                <div class="col"><i class="fas fa-exchange-alt f-18"></i></div>
+                                <div class="col"><i class="fas fa-exchange-alt f-18" style="color: #5F259F;"></i></div>
                                 <div class="col">
                                     <span>Abertas</span>
-                                    <h6 class="mb-0 badge badge-pill badge-yellow text-white">
+                                    <h6 class="mb-0 badge badge-pill text-white" style="background-color: #5F259F;">
                                     <?php echo $total_avulsos_abertos; ?>
                                     </h6>
                                 </div>
                             </div>
-                            <h6 class="pt-badge bg-yellow small">Park Cloud</h6>
+                            <h6 class="pt-badge small text-white" style="background-color: #5F259F;">Park Cloud</h6>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-12">
                     <div class="card proj-t-card">
-                        <div class="card-body text-success">
+                        <div class="card-body text-orange">
                             <div class="row align-items-center mb-30">
                                 <div class="col-auto">
-                                    <i class="fas fa-users f-30"></i>
+                                    <i class="fas fa-users f-30" style="color: #FF7F00;"></i>
                                 </div>
                                 <div class="col pl-0">
                                     <h6 class="mb-5">Mensalistas</h6>
@@ -153,19 +153,19 @@
                             <div class="row align-items-center text-center">
                                 <div class="col">
                                     <span>Ativos</span>
-                                    <h6 class="mb-0 badge badge-pill badge-success text-white">
+                                    <h6 class="mb-0 badge badge-pill text-white" style="background-color: #FF7F00;">
                                     <?php echo $total_mensalistas_ativos; ?>
                                     </h6>
                                 </div>
-                                <div class="col"><i class="fas fa-exchange-alt f-18"></i></div>
+                                <div class="col"><i class="fas fa-exchange-alt f-18" style="color: #FF7F00;"></i></div>
                                 <div class="col">
                                     <span>Inativos</span>
-                                    <h6 class="mb-0 badge badge-pill badge-success text-white">
+                                    <h6 class="mb-0 badge badge-pill text-white" style="background-color: #FF7F00;">
                                     <?php echo $total_mensalistas_inativos; ?>
                                     </h6>
                                 </div>
                             </div>
-                            <h6 class="pt-badge bg-success small">Park Cloud</h6>
+                            <h6 class="pt-badge small text-white" style="background-color: #FF7F00;">Park Cloud</h6>
                         </div>
                     </div>
                 </div>
