@@ -48,18 +48,22 @@
                                 </div>
                                 <div class="col pl-0">
                                     <h6 class="mb-5">Total vagas</h6>
-                                    <h6 class="mb-5 font-weight-bold">120</h6>
+                                    <h6 class="mb-5 font-weight-bold"><?php echo $numero_total_vagas->precificacao_numero_vagas; ?></h6>
                                 </div>
                             </div>
                             <div class="row align-items-center text-center">
                                 <div class="col">
                                     <span>Livre</span>
-                                    <h6 class="mb-0 badge badge-pill badge-navy text-white">327</h6>
+                                    <h6 class="mb-0 badge badge-pill badge-navy text-white">
+                                    <?php echo $numero_total_vagas->precificacao_numero_vagas - $total_estacionados_agora; ?>
+                                    </h6>
                                 </div>
                                 <div class="col"><i class="fas fa-exchange-alt f-18"></i></div>
                                 <div class="col">
-                                    <span>Livre</span>
-                                    <h6 class="mb-0 badge badge-pill badge-navy text-white">327</h6>
+                                    <span>Ocupadas</span>
+                                    <h6 class="mb-0 badge badge-pill badge-navy text-white">
+                                        <?php echo $total_estacionados_agora; ?>
+                                    </h6>
                                 </div>
                             </div>
                             <h6 class="pt-badge bg-navy small">Park Cloud</h6>
@@ -75,18 +79,24 @@
                                 </div>
                                 <div class="col pl-0">
                                     <h6 class="mb-5">Mensalidades</h6>
-                                    <h6 class="mb-5 font-weight-bold">R$500,00</h6>
+                                    <h6 class="mb-5 font-weight-bold">
+                                        <?php echo 'R$&nbsp;'.$total_mensalidades->total_mensalidades; ?>
+                                    </h6>
                                 </div>
                             </div>
                             <div class="row align-items-center text-center">
                                 <div class="col">
                                     <span>Pagas</span>
-                                    <h6 class="mb-0 badge badge-pill badge-blue text-white">327</h6>
+                                    <h6 class="mb-0 badge badge-pill badge-blue text-white">
+                                        <?php echo $total_mensalidades_pagas; ?>
+                                    </h6>
                                 </div>
                                 <div class="col"><i class="fas fa-exchange-alt f-18"></i></div>
                                 <div class="col">
                                     <span>Abertas</span>
-                                    <h6 class="mb-0 badge badge-pill badge-blue text-white">327</h6>
+                                    <h6 class="mb-0 badge badge-pill badge-blue text-white">
+                                        <?php echo $total_mensalidades_abertas; ?>
+                                    </h6>
                                 </div>
                             </div>
                             <h6 class="pt-badge bg-blue small">Park Cloud</h6>
@@ -102,18 +112,24 @@
                                 </div>
                                 <div class="col pl-0">
                                     <h6 class="mb-5">Avulsos</h6>
-                                    <h6 class="mb-5 font-weight-bold">R$750,00</h6>
+                                    <h6 class="mb-5 font-weight-bold">
+                                    <?php echo 'R$&nbsp;'.$total_avulsos->total_avulsos; ?>
+                                    </h6>
                                 </div>
                             </div>
                             <div class="row align-items-center text-center">
                                 <div class="col">
                                     <span>Pagas</span>
-                                    <h6 class="mb-0 badge badge-pill badge-yellow text-white">327</h6>
+                                    <h6 class="mb-0 badge badge-pill badge-yellow text-white">
+                                    <?php echo $total_avulsos_pagos; ?>
+                                    </h6>
                                 </div>
                                 <div class="col"><i class="fas fa-exchange-alt f-18"></i></div>
                                 <div class="col">
                                     <span>Abertas</span>
-                                    <h6 class="mb-0 badge badge-pill badge-yellow text-white">327</h6>
+                                    <h6 class="mb-0 badge badge-pill badge-yellow text-white">
+                                    <?php echo $total_avulsos_abertos; ?>
+                                    </h6>
                                 </div>
                             </div>
                             <h6 class="pt-badge bg-yellow small">Park Cloud</h6>
@@ -129,18 +145,24 @@
                                 </div>
                                 <div class="col pl-0">
                                     <h6 class="mb-5">Mensalistas</h6>
-                                    <h6 class="mb-5 font-weight-bold">R$1250,00</h6>
+                                    <h6 class="mb-5 font-weight-bold">
+                                    <?php echo $total_mensalistas; ?>
+                                    </h6>
                                 </div>
                             </div>
                             <div class="row align-items-center text-center">
                                 <div class="col">
                                     <span>Ativos</span>
-                                    <h6 class="mb-0 badge badge-pill badge-success text-white">327</h6>
+                                    <h6 class="mb-0 badge badge-pill badge-success text-white">
+                                    <?php echo $total_mensalistas_ativos; ?>
+                                    </h6>
                                 </div>
                                 <div class="col"><i class="fas fa-exchange-alt f-18"></i></div>
                                 <div class="col">
                                     <span>Inativos</span>
-                                    <h6 class="mb-0 badge badge-pill badge-success text-white">327</h6>
+                                    <h6 class="mb-0 badge badge-pill badge-success text-white">
+                                    <?php echo $total_mensalistas_inativos; ?>
+                                    </h6>
                                 </div>
                             </div>
                             <h6 class="pt-badge bg-success small">Park Cloud</h6>
