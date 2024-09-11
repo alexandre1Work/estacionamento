@@ -1,10 +1,10 @@
 <div class="app-sidebar colored">
-        <div class="sidebar-header">
-            <a class="header-brand" href="index.html">
-                <div class="logo-img">
+<div class="sidebar-header">
+            <a class="header-brand" href="<?php echo base_url('/') ?>">
+                <!-- <div class="logo-img">
                     <img src="src/img/brand-white.svg" class="header-brand-img" alt="lavalite"> 
-                </div>
-                <span class="text">ThemeKit</span>
+                </div> -->
+                <span class="text"><i class="fab fa-pied-piper"></i>&nbsp;Park Cloud</span>
             </a>
             <button type="button" class="nav-toggle"><i data-toggle="expanded" class="ik ik-toggle-right toggle-icon"></i></button>
             <button id="sidebarClose" class="nav-close"><i class="ik ik-x"></i></button>

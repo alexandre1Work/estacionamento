@@ -87,16 +87,34 @@
 
                                         <td><?php echo ($forma->forma_pagamento_ativa == 1 ? '<span class="badge badge-pill badge-success mb-1"> 
                                         <i class="fas fa-lock-open"></i> &nbsp;Sim</span>' : '<span class="badge badge-pill badge-warning mb-1"> <i class="fas fa-lock"></i> &nbsp;Não</span>'); ?></td>
-                                        <td class="text-right">
-                                            <a data-toggle="tooltip" data-placement="bottom" title="Editar <?php echo $this->router->fetch_class(); ?>" href="<?php echo base_url($this->router->fetch_class().'/core/'.$forma->forma_pagamento_id); ?>" class="btn btn-primary mr-1">
-                                                <i class="ik ik-edit-2"></i>Editar
-                                            </a> 
 
-                                            <button type="button" title="Excluir <?php echo $this->router->fetch_class(); ?> " class="btn btn-danger" data-toggle="modal" 
-                                            data-target="#forma-<?php echo $forma->forma_pagamento_id; ?>">
-                                                <i class="ik ik-trash-2"></i>Excluir
-                                            </button> 
+                                        <td class="text-right">
+                                            <!-- Botão de edição -->
+                                            <?php if ($forma->forma_pagamento_id != 6): ?>
+                                                <a data-toggle="tooltip" data-placement="bottom" title="Editar <?php echo $this->router->fetch_class(); ?>" href="<?php echo base_url($this->router->fetch_class().'/core/'.$forma->forma_pagamento_id); ?>" class="btn btn-primary mr-1">
+                                                    <i class="ik ik-edit-2"></i>Editar
+                                                </a>
+                                            <?php else: ?>
+                                                <button type="button" title="Edição não permitida para esta forma de pagamento" class="btn btn-primary mr-1" disabled>
+                                                    <i class="ik ik-edit-2"></i>Editar
+                                                </button>
+                                            <?php endif; ?>
+
+                                            <!-- Botão de exclusão -->
+                                            <?php if ($forma->forma_pagamento_id != 6): ?>
+                                                <!-- Exibir botão de exclusão se o ID não for 6 -->
+                                                <button type="button" title="Excluir <?php echo $this->router->fetch_class(); ?> " class="btn btn-danger" data-toggle="modal" 
+                                                data-target="#forma-<?php echo $forma->forma_pagamento_id; ?>">
+                                                    <i class="ik ik-trash-2"></i>Excluir
+                                                </button>
+                                            <?php else: ?>
+                                                <!-- Exibir botão desativado se o ID for 6 -->
+                                                <button type="button" title="Exclusão não permitida para esta forma de pagamento" class="btn btn-danger" disabled>
+                                                    <i class="ik ik-trash-2"></i>Excluir
+                                                </button>
+                                            <?php endif; ?>
                                         </td>
+                                        
                                     </tr>
 
                                     <div class="modal fade" id="forma-<?php echo $forma->forma_pagamento_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">

@@ -38,13 +38,14 @@
             <?php endif; ?>
 
             <div class="row">
+                
                 <!-- project-ticket start -->
-                <div class="col-xl-3 col-md-12">
+                <div class="col-xl-3 col-md-12" >
                     <div class="card proj-t-card">
                         <div class="card-body text-navy">
                             <div class="row align-items-center mb-30">
                                 <div class="col-auto">
-                                    <i class="fas fa-warehouse f-30"></i>
+                                    <i class="fas fa-warehouse f-30 analytic-icon"></i>
                                 </div>
                                 <div class="col pl-0">
                                     <h6 class="mb-5">Total vagas</h6>
@@ -170,6 +171,7 @@
                     </div>
                 </div>
                 <!-- project-ticket end -->
+
             </div>
 
             <div class="row">

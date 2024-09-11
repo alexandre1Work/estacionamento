@@ -98,13 +98,23 @@
                                                 <i class="ik ik-edit-2"></i>Editar
                                             </a> 
 
+                                            <?php if (!in_array($categoria->precificacao_id, [1, 2, 4, 5])): ?>
+                                            <!-- Exibir botão de exclusão se o ID não for 1, 2, 4 ou 5 -->
                                             <button type="button" title="Excluir <?php echo $this->router->fetch_class(); ?> " class="btn btn-danger" data-toggle="modal" 
                                             data-target="#categoria-<?php echo $categoria->precificacao_id; ?>">
                                                 <i class="ik ik-trash-2"></i>Excluir
-                                            </button> 
+                                            </button>
+                                            <?php else: ?>
+                                            <!-- Exibir botão desativado se o ID for 1, 2, 4 ou 5 -->
+                                            <button type="button" title="Exclusão não permitida para esta categoria" class="btn btn-danger" disabled>
+                                                <i class="ik ik-trash-2"></i>Excluir
+                                            </button>
+                                            <?php endif; ?>
+
                                         </td>
                                     </tr>
-
+                                    
+                                    <!-- Modal de exclusão -->
                                     <div class="modal fade" id="categoria-<?php echo $categoria->precificacao_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
