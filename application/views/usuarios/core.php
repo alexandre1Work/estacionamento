@@ -94,54 +94,56 @@
 
                                 </div>  
 
-                                <div class="form-group row">
-                                
-                                    <div class="col-md-6 mb-20">
-                                        <label>Perfil de acesso</label>
+                                <?php if($this->ion_auth->is_admin()): ?>
+                                    <div class="form-group row">
                                         
-                                        <select class="form-control" name="perfil">
-
-                                            <?php if (isset($usuarios)): ?>
-
-                                                <option value="2" <?php echo ($perfil_usuario->id == 2 ? 'selected' : ''); ?> >Atendente</option>
-
-                                                <option value="1" <?php echo ($perfil_usuario->id == 1 ? 'selected' : ''); ?> >Administrador</option>
-
-                                            <?php else: ?>
-
-                                                <option value="2">Atendente</option>
-                                                <option value="1">Administrador</option>
-
-                                            <?php endif; ?>
-
-                                        </select>
-                                        
-                                    </div>
-
-                                    <div class="col-md-6 mb-20">
-                                        <label>Ativo</label>
-                                        
-                                        <select class="form-control" name="active">
-                                        
-                                            <?php if(isset($usuarios)): ?>
-
-                                            <option value="0" <?php echo ($usuarios->active == 0 ? 'selected' : '') ?> >Não</option>
-                                            <option value="1" <?php echo ($usuarios->active == 1 ? 'selected' : '') ?>>Sim</option>
+                                        <div class="col-md-6 mb-20">
+                                            <label>Perfil de acesso</label>
                                             
-                                            <?php else: ?>
+                                            <select class="form-control" name="perfil">
 
-                                                <option value="0">Não</option>
-                                                <option value="1">Sim</option>
+                                                <?php if (isset($usuarios)): ?>
+
+                                                    <option value="2" <?php echo ($perfil_usuario->id == 2 ? 'selected' : ''); ?> >Atendente</option>
+
+                                                    <option value="1" <?php echo ($perfil_usuario->id == 1 ? 'selected' : ''); ?> >Administrador</option>
+
+                                                <?php else: ?>
+
+                                                    <option value="2">Atendente</option>
+                                                    <option value="1">Administrador</option>
+
+                                                <?php endif; ?>
+
+                                            </select>
+                                            
+                                        </div>
+
+                                        <div class="col-md-6 mb-20">
+                                            <label>Ativo</label>
+                                            
+                                            <select class="form-control" name="active">
+                                            
+                                                <?php if(isset($usuarios)): ?>
+
+                                                <option value="0" <?php echo ($usuarios->active == 0 ? 'selected' : '') ?> >Não</option>
+                                                <option value="1" <?php echo ($usuarios->active == 1 ? 'selected' : '') ?>>Sim</option>
+                                                
+                                                <?php else: ?>
+
+                                                    <option value="0">Não</option>
+                                                    <option value="1">Sim</option>
 
 
 
-                                            <?php endif; ?>
+                                                <?php endif; ?>
 
-                                        </select>
-                                        
-                                    </div>
+                                            </select>
+                                            
+                                        </div>
 
-                                </div> 
+                                    </div> 
+                                <?php endif; ?>
 
                                 <?php if(isset($usuarios)): ?>
                                 <div class="form-group row">

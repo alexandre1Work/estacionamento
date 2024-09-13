@@ -14,6 +14,13 @@ class Usuarios extends CI_Controller{
 
     public function index() {
 
+        if (!$this->ion_auth->is_admin()) {
+
+            $this->session->set_flashdata('info', 'Você não tem permissão para acessar esse Menu');
+            redirect('/');
+
+        }
+
         $data = array(
             'titulo' => 'Usuários cadastrados',
             'sub_titulo' => 'Chegou a hora de listar os usuários cadastrados no banco de dados',
@@ -41,20 +48,21 @@ class Usuarios extends CI_Controller{
 
         if(!$usuario_id){
 
+            if (!$this->ion_auth->is_admin()) {
+
+                $this->session->set_flashdata('info', 'Você não tem permissão para acessar esse Menu');
+                redirect('/');
+    
+            }
+
+
             //cadastro de novo usuário
-
-                $perfil_atual = $this->ion_auth->get_users_groups($usuario_id)->row();
-
+            
                 $this->form_validation->set_rules('first_name', 'Nome', 'trim|required|min_length[3]|max_length[20]');
-
                 $this->form_validation->set_rules('last_name', 'Sobrenome', 'trim|required|min_length[3]|max_length[20]');
-
                 $this->form_validation->set_rules('username', 'Usuário', 'trim|required|min_length[3]|max_length[30]|is_unique[users.username]');
-
                 $this->form_validation->set_rules('email', 'E-mail', 'trim|valid_email|required|min_length[3]|max_length[200]|is_unique[users.email]');
-
                 $this->form_validation->set_rules('password', 'Senha', 'trim|required|min_length[8]');
-
                 $this->form_validation->set_rules('confirmacao', 'Confirmação', 'trim|required|matches[password]');
 
                 if($this->form_validation->run()) {
@@ -113,6 +121,12 @@ class Usuarios extends CI_Controller{
 
                 //Editar Usuário
 
+
+                if ($this->session->userdata('user_id') != $usuario_id && !$this->ion_auth->is_admin()){
+                    $this->session->set_flashdata('error', 'Erro: Ação não permitida. Você não tem permissão para alterar ou editar um usuário diferente do seu. Tentativas não autorizadas são monitoradas.');
+                    redirect('/');
+                }
+
                 $perfil_atual = $this->ion_auth->get_users_groups($usuario_id)->row();
 
                 $this->form_validation->set_rules('first_name', 'Nome', 'trim|required|min_length[3]|max_length[20]');
@@ -149,6 +163,12 @@ class Usuarios extends CI_Controller{
                         ), $this->input->post()
                     );
 
+                    if (!$this->ion_auth->is_admin()) {
+
+                        unset($data['active']);
+            
+                    }
+
                     $password = $this->input->post('password');
 
                     //Não atualizar senha
@@ -160,19 +180,25 @@ class Usuarios extends CI_Controller{
                     $data = html_escape($data);
 
                     // echo '<pre>';
-                    // print_r($this->input->post());
+                    // print_r($data);
                     // exit();
 
                     if ($this->ion_auth->update($usuario_id, $data)) {
 
                         $perfil_post = $this->input->post('perfil');
+                        
+                        //se foi passado o 'perfil', então é admin
+                        if($perfil_post) {
 
-                        //Se for diferente atualiza o grupo
-                        if($perfil_atual->id != $perfil_post) {
-                            
-                            $this->ion_auth->remove_from_group($perfil_atual->id, $usuario_id);
-                            $this->ion_auth->add_to_group($perfil_post, $usuario_id);
+                            //Se for diferente atualiza o grupo
+                            if($perfil_atual->id != $perfil_post) {
+                                
+                                $this->ion_auth->remove_from_group($perfil_atual->id, $usuario_id);
+                                $this->ion_auth->add_to_group($perfil_post, $usuario_id);
+                            }
+
                         }
+                        
                         
                         $this->session->set_flashdata('sucesso', 'Dados atualizados com sucesso!');
                     } else {
@@ -180,7 +206,12 @@ class Usuarios extends CI_Controller{
                         $this->session->set_flashdata('error', 'Não foi possível atualizar os dados');
                     }
 
-                    redirect($this->router->fetch_class());
+                    if(!$this->ion_auth->is_admin()){
+                        redirect('/');
+                    }else{
+                        redirect($this->router->fetch_class());
+                    }
+
                 } else {
                     //erro de validação
 
@@ -236,6 +267,11 @@ class Usuarios extends CI_Controller{
     }
 
     public function del($usuario_id = NULL) {
+
+        if ($this->session->userdata('user_id') != $usuario_id && !$this->ion_auth->is_admin()){
+            $this->session->set_flashdata('error', 'Erro: Ação não permitida. Você não tem permissão para editar ou deletar um usuário diferente do seu. Tentativas não autorizadas são monitoradas.');
+            redirect('/');
+        }
 
         if (!$usuario_id || !$this->core_model->get_by_id('users', array('id' => $usuario_id))){
             
