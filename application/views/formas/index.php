@@ -83,79 +83,75 @@
                     <div class="card">
                         <div class="card-header"> <a data-toggle="tooltip" data-placement="right" title="Cadastrar <?php echo $this->router->fetch_class(); ?>" class="btn btn-success" href="<?php echo base_url($this->router->fetch_class() . '/core/'); ?>">+ Nova Forma de pagamento</a> </div>
                         <div class="card-body">
-                            <table class="table data_table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Nome da forma de pagamento</th>
-                                        <th>Ativa</th>
-                                        <th class="nosort text-right pr-45">
-                                            <span class="pr-40">Ações</span>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($formas as $forma): ?>
-                                    <tr>
-                                        <td><?php echo $forma->forma_pagamento_id; ?></td>
-                                        <td><?php echo $forma->forma_pagamento_nome; ?></td>
-
-                                        <td><?php echo ($forma->forma_pagamento_ativa == 1 ? '<span class="badge badge-pill badge-success mb-1"> 
-                                        <i class="fas fa-lock-open"></i> &nbsp;Sim</span>' : '<span class="badge badge-pill badge-warning mb-1"> <i class="fas fa-lock"></i> &nbsp;Não</span>'); ?></td>
-
-                                        <td class="text-right">
-                                            <!-- Botão de edição -->
-                                            <?php if ($forma->forma_pagamento_id != 6): ?>
-                                                <a data-toggle="tooltip" data-placement="bottom" title="Editar <?php echo $this->router->fetch_class(); ?>" href="<?php echo base_url($this->router->fetch_class().'/core/'.$forma->forma_pagamento_id); ?>" class="btn btn-primary mr-1">
-                                                    <i class="ik ik-edit-2"></i>Editar
-                                                </a>
-                                            <?php else: ?>
-                                                <button type="button" title="Edição não permitida para esta forma de pagamento" class="btn btn-primary mr-1" disabled>
-                                                    <i class="ik ik-edit-2"></i>Editar
-                                                </button>
-                                            <?php endif; ?>
-
-                                            <!-- Botão de exclusão -->
-                                            <?php if ($forma->forma_pagamento_id != 6): ?>
-                                                <!-- Exibir botão de exclusão se o ID não for 6 -->
-                                                <button type="button" title="Excluir <?php echo $this->router->fetch_class(); ?> " class="btn btn-danger" data-toggle="modal" 
-                                                data-target="#forma-<?php echo $forma->forma_pagamento_id; ?>">
-                                                    <i class="ik ik-trash-2"></i>Excluir
-                                                </button>
-                                            <?php else: ?>
-                                                <!-- Exibir botão desativado se o ID for 6 -->
-                                                <button type="button" title="Exclusão não permitida para esta forma de pagamento" class="btn btn-danger" disabled>
-                                                    <i class="ik ik-trash-2"></i>Excluir
-                                                </button>
-                                            <?php endif; ?>
-                                        </td>
-                                        
-                                    </tr>
-
-                                    <div class="modal fade" id="forma-<?php echo $forma->forma_pagamento_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalCenterLabel"><i class="fas fa-exclamation-triangle text-danger">&nbsp;Tem certeza da exclusão do registro?</i></h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                <p>Se deseja excluir o registro clique em <strong>"Sim, excluir"</strong></p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button data-toggle="tooltip"    data-placement="bottom" title="Cancelar" type="button" class="btn btn-secondary" data-dismiss="modal">Não, voltar</button>
-
-                                                    <a data-toggle="tooltip"    data-placement="bottom" title="Excluir" href="<?php echo base_url($this->router->fetch_class().'/del/'.$forma->forma_pagamento_id); ?>" class="btn btn-danger">
-                                                    Sim, excluir
+                            <div class="table-responsive-sm">
+                                <table class="table data_table pl-20 pr-20">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nome da forma de pagamento</th>
+                                            <th>Ativa</th>
+                                            <th class="nosort text-right pr-45">
+                                                <span class="pr-40">Ações</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($formas as $forma): ?>
+                                        <tr>
+                                            <td><?php echo $forma->forma_pagamento_id; ?></td>
+                                            <td><?php echo $forma->forma_pagamento_nome; ?></td>
+                                            <td><?php echo ($forma->forma_pagamento_ativa == 1 ? '<span class="badge badge-pill badge-success mb-1">
+                                            <i class="fas fa-lock-open"></i> &nbsp;Sim</span>' : '<span class="badge badge-pill badge-warning mb-1"> <i class="fas fa-lock"></i> &nbsp;Não</span>'); ?></td>
+                                            <td class="text-right">
+                                                <!-- Botão de edição -->
+                                                <?php if ($forma->forma_pagamento_id != 6): ?>
+                                                    <a data-toggle="tooltip" data-placement="bottom" title="Editar <?php echo $this->router->fetch_class(); ?>" href="<?php echo base_url($this->router->fetch_class().'/core/'.$forma->forma_pagamento_id); ?>" class="btn btn-primary mr-1">
+                                                        <i class="ik ik-edit-2"></i>Editar
                                                     </a>
+                                                <?php else: ?>
+                                                    <button type="button" title="Edição não permitida para esta forma de pagamento" class="btn btn-primary mr-1" disabled>
+                                                        <i class="ik ik-edit-2"></i>Editar
+                                                    </button>
+                                                <?php endif; ?>
+                                                <!-- Botão de exclusão -->
+                                                <?php if ($forma->forma_pagamento_id != 6): ?>
+                                                    <!-- Exibir botão de exclusão se o ID não for 6 -->
+                                                    <button type="button" title="Excluir <?php echo $this->router->fetch_class(); ?> " class="btn btn-danger" data-toggle="modal"
+                                                    data-target="#forma-<?php echo $forma->forma_pagamento_id; ?>">
+                                                        <i class="ik ik-trash-2"></i>Excluir
+                                                    </button>
+                                                <?php else: ?>
+                                                    <!-- Exibir botão desativado se o ID for 6 -->
+                                                    <button type="button" title="Exclusão não permitida para esta forma de pagamento" class="btn btn-danger" disabled>
+                                                        <i class="ik ik-trash-2"></i>Excluir
+                                                    </button>
+                                                <?php endif; ?>
+                                            </td>
+                                
+                                        </tr>
+                                        <div class="modal fade" id="forma-<?php echo $forma->forma_pagamento_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalCenterLabel"><i class="fas fa-exclamation-triangle text-danger">&nbsp;Tem certeza da exclusão do registro?</i></h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <p>Se deseja excluir o registro clique em <strong>"Sim, excluir"</strong></p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button data-toggle="tooltip"    data-placement="bottom" title="Cancelar" type="button" class="btn btn-secondary" data-dismiss="modal">Não, voltar</button>
+                                                        <a data-toggle="tooltip"    data-placement="bottom" title="Excluir" href="<?php echo base_url($this->router->fetch_class().'/del/'.$forma->forma_pagamento_id); ?>" class="btn btn-danger">
+                                                        Sim, excluir
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
