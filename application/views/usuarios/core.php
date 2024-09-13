@@ -155,7 +155,15 @@
                                 <?php endif; ?>
 
                                 <button type="submit" class="btn btn-primary mr-2">Salvar</button>
-                                <a class="btn btn-info" href="<?php echo base_url($this->router->fetch_class()); ?>">Voltar</a>
+                                
+                                <a class="btn btn-info" href="<?php
+                                    if ($this->ion_auth->is_admin()) {
+                                        echo base_url($this->router->fetch_class());
+                                    } else {
+                                        echo base_url();
+                                    }
+                                ?>">Voltar</a>
+
                             </form>
 
                         </div>
