@@ -102,8 +102,8 @@ class Mensalistas extends CI_Controller{
                 
                 //erro de validação
                 $data = array(
-                    'titulo' => 'Editar Mensalista',
-                    'sub_titulo' => 'Chegou a hora de listar o Mensalista',
+                    'titulo' => 'Cadastrando Mensalista',
+                    'sub_titulo' => 'Chegou a hora de cadastrar o Mensalista',
                     'icone_view' => 'fa fa-user-tie',
                     'scripts' => array(
                         'plugins/mask/jquery.mask.min.js',
@@ -220,7 +220,7 @@ class Mensalistas extends CI_Controller{
                 //erro de validação
                 $data = array(
                     'titulo' => 'Editar Mensalista',
-                    'sub_titulo' => 'Chegou a hora de listar o Mensalista',
+                    'sub_titulo' => 'Chegou a hora de editar o Mensalista',
                     'icone_view' => 'fa fa-user-tie',
                     'scripts' => array(
                         'plugins/mask/jquery.mask.min.js',
@@ -321,6 +321,12 @@ class Mensalistas extends CI_Controller{
     }
 
     public function del($mensalista_id = NULL) {
+
+        if ($this->session->userdata('user_id') != $usuario_id && !$this->ion_auth->is_admin()){
+            $this->session->set_flashdata('info', 'Você não tem permissão para excluir Mensalistas');
+            redirect('/');
+        }
+
         //se não foi passaado ao metodo del um id ele retorna
         //OU se foi passado mas não existe tbm retorna o erro
         if(!$mensalista_id || !$this->core_model->get_by_id('mensalistas', array('mensalista_id' => $mensalista_id))){
@@ -332,6 +338,13 @@ class Mensalistas extends CI_Controller{
             $this->session->set_flashdata('error', 'Não é possivel excluir mensalista ativo');
             redirect($this->router->fetch_class());
         } 
+
+        // se estiver tentando deletar com ordens no sistema, tem que deletar todas
+        if($this->core_model->get_by_id('mensalidades', array('mensalidade_mensalista_id' => $mensalista_id))){
+            $this->session->set_flashdata('error', 'Não é possível excluir este mensalista, pois ele possui <i class="fas fa-hand-holding-usd"></i> &nbsp; MENSALIDADES atreladas. <br><br> &nbsp;*&nbsp;&nbsp; Para realizar a exclusão, todas as mensalidades vinculadas devem ser removidas.');
+            redirect($this->router->fetch_class());
+        } 
+
         // passando as verificações chega o metodo de del
         $this->core_model->delete('mensalistas', array('mensalista_id' => $mensalista_id));
         redirect($this->router->fetch_class());
