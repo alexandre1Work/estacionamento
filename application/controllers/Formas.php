@@ -22,16 +22,19 @@ class Formas extends CI_Controller{
             'formas' => $this->core_model->get_all('formas_pagamentos'),
         );
 
-        // echo '<pre>';
-        // print_r ($data['precificacoes']);
-        // exit();
-
         $this->load->view('layout/header', $data);
         $this->load->view('formas/index');
         $this->load->view('layout/footer');
     }
 
     public function core($forma_pagamento_id = NULL) {
+
+        if (!$this->ion_auth->is_admin()) {
+
+            $this->session->set_flashdata('info', 'Você não tem permissão para editar ou cadastrar novas formas de pagamento.');
+            redirect($this->router->fetch_class());
+
+        }
 
         if(!$forma_pagamento_id) {
             //cadastrando
@@ -123,6 +126,14 @@ class Formas extends CI_Controller{
     }
 
     public function del($forma_pagamento_id = NULL) {
+
+        if (!$this->ion_auth->is_admin()) {
+
+            $this->session->set_flashdata('info', 'Você não tem permissão para deletar formas de pagamento');
+            redirect($this->router->fetch_class());
+
+        }
+
         if(!$this->core_model->get_by_id('formas_pagamentos', array('forma_pagamento_id' => $forma_pagamento_id))){
             $this->session->set_flashdata('error', 'Forma de pagamento não encontrada');
             redirect($this->router->fetch_class());

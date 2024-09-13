@@ -268,23 +268,33 @@ class Usuarios extends CI_Controller{
 
     public function del($usuario_id = NULL) {
 
+        //camda de acesso do atendente
         if ($this->session->userdata('user_id') != $usuario_id && !$this->ion_auth->is_admin()){
             $this->session->set_flashdata('error', 'Erro: Ação não permitida. Você não tem permissão para editar ou deletar um usuário diferente do seu. Tentativas não autorizadas são monitoradas.');
             redirect('/');
         }
 
+        //1° camada de proteção: se o id do usuario foi passado && se ele existe.
         if (!$usuario_id || !$this->core_model->get_by_id('users', array('id' => $usuario_id))){
             
             $this->session->set_flashdata('error', 'Usuário não encontrado');
-            redirect($this->router->fetch_class());
+            redirect($this->router->fetch_class()); //volta pra view
         } else {
             // Deleta
 
+            //2° camada de proteção: verifica se é um adm.
             if ($this->ion_auth->is_admin($usuario_id)) {
                 $this->session->set_flashdata('error', 'Administrador não pode ser excluído!');
                 redirect($this->router->fetch_class());
             }
 
+            //3° camada de proteção: não permite a deleção de um usuário ativo.
+            if($this->core_model->get_by_id('users', array('id' => $usuario_id, 'active' => 1))) {
+                $this->session->set_flashdata('error', 'Não é possível excluir um usuário ativo. Por favor, desative o usuário antes de tentar excluí-lo.');
+                redirect($this->router->fetch_class());
+            }
+
+            //DELEÇÃO PROPRIAMENTE DITA
             if($this->ion_auth->delete_user($usuario_id)) {
                 $this->session->set_flashdata('sucesso', 'Registro excluído com sucesso!');
             }else{

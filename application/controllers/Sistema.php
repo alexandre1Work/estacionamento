@@ -10,29 +10,17 @@ class Sistema extends CI_Controller {
         if (!$this->ion_auth->logged_in()) {
           redirect('login');
         }
+
+        if (!$this->ion_auth->is_admin()) {
+
+            $this->session->set_flashdata('info', 'Você não tem permissão para acessar esse Menu');
+            redirect('/');
+
+        }
     }
 
 
     public function index() {
-
-        /*
-            [sistema_id] => 1
-            [sistema_razao_social] => Park Now System
-            [sistema_nome_fantasia] => Park Now
-            [sistema_cnpj] => 80.838.809/0001-26  //18 caracteres
-            [sistema_ie] => 683.90228-49
-            [sistema_telefone_fixo] => (41) 3232-3030
-            [sistema_telefone_movel] => (41) 9999-9999
-            [sistema_email] => parknow@contato.com.br
-            [sistema_site_url] => http://parknow.com.br
-            [sistema_cep] => 80510-000
-            [sistema_endereco] => Rua da Programação
-            [sistema_numero] => 54
-            [sistema_cidade] => Curitiba
-            [sistema_estado] => PR
-            [sistema_texto_ticket] => Park Now - Seu veículo em boas mãos.
-            [sistema_data_alteracao] => 2020-03-10 15:01:36
-        */
 
         $this->form_validation->set_rules('sistema_razao_social', 'Razão social', 'trim|required|min_length[5]|max_length[145]');
         $this->form_validation->set_rules('sistema_nome_fantasia', 'Nome fantasia', 'trim|required|min_length[5]|max_length[145]');
