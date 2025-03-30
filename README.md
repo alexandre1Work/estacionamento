@@ -4,7 +4,10 @@ O **SGE (Sistema de Gestão para Estacionamentos)** é uma solução abrangente 
 
 ---
 
-![Texto alternativo]()
+<div style="display: flex;">
+  <img src="public/img/home.png" alt="Imagem 1" style="width: 45%; margin-right: 10px;">
+  <img src="public/img/estacionar.png" alt="Imagem 2" style="width: 45%;">
+</div>
 
 ---
 ## ✨ Funcionalidades  
