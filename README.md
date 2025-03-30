@@ -42,7 +42,6 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 - **Frontend:** HTML, CSS, JavaScript, Bootstrap  
 - **Segurança e Autenticação:** IonAuth  
 - **Impressão do Ticket:** Dompdf  
-- **Gerenciamento de Tempo:** ThimeKit  
 
 ---
 
