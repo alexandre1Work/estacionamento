@@ -1,8 +1,8 @@
-SGE - Sistema de Gestão para Estacionamentos
+# SGE - Sistema de Gestão para Estacionamentos
 
 O SGE (Sistema de Gestão para Estacionamentos) é uma solução abrangente projetada para atender às necessidades específicas de empresas de estacionamento. Com diversas funcionalidades integradas, o sistema permite um controle eficiente e centralizado das informações essenciais para a gestão de um estacionamento.
 
-✨ Funcionalidades
+## ✨ Funcionalidades
 
 	- Gestão Financeira: Controle de valores a receber dos mensalistas e tickets avulsos, incluindo status de pagamento.
 	
@@ -20,7 +20,7 @@ O SGE (Sistema de Gestão para Estacionamentos) é uma solução abrangente proj
 	
 	- Tratamento de Erros e Restrições: Garantia da integridade dos dados e prevenção de inconsistências.
 
-📝 Restrições e Validações
+## 📝 Restrições e Validações
 
 O sistema impede a exclusão ou desativação de registros essenciais, como:
 
@@ -29,7 +29,7 @@ O sistema impede a exclusão ou desativação de registros essenciais, como:
 	- Usuários administradores
 	- Categorias e formas de pagamento vinculadas a registros ativos
 
-🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologias Utilizadas
 
 O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
@@ -39,17 +39,12 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 	- Impressão do ticket: Dompdf
 	- Gerenciamento de Tempo: ThimeKit
 
-🛡️ Instalação e Configuração
+## 🛡️ Instalação e Configuração
 
-Clone o repositório:
-
-git clone https://github.com/seu-usuario/SGE.git
-
-Configure o banco de dados e as credenciais em application/config/database.php
-
-Configure o ambiente em application/config/config.php
-
-Execute as migrações do banco de dados
-
-Inicie o servidor local do PHP ou configure em um servidor web
+	- Clone o repositório:
+	- git clone https://github.com/seu-usuario/SGE.git
+	- Configure o banco de dados e as credenciais em application/config/database.php
+	- Configure o ambiente em application/config/config.php
+	- Execute as migrações do banco de dados
+	- Inicie o servidor local do PHP ou configure em um servidor web
 
