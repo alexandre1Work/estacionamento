@@ -1,9 +1,12 @@
-# SGE - Sistema de Gestão para Estacionamentos
+# 🅿️ SGE - Sistema de Gestão para Estacionamentos
 
 O **SGE (Sistema de Gestão para Estacionamentos)** é uma solução abrangente projetada para atender às necessidades específicas de empresas de estacionamento. Com diversas funcionalidades integradas, o sistema permite um controle eficiente e centralizado das informações essenciais para a gestão de um estacionamento.
 
 ---
 
+![Texto alternativo]()
+
+---
 ## ✨ Funcionalidades  
 
 - **Gestão Financeira:** Controle de valores a receber dos mensalistas e tickets avulsos, incluindo status de pagamento.  
@@ -45,3 +48,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 1. Clone o repositório:  
    ```bash
    git clone https://github.com/seu-usuario/SGE.git
+2. Configure o banco de dados e as credenciais em application/config/database.php
+3. Configure o ambiente em application/config/config.php
+4. Execute as migrações do banco de dados
+5. Inicie o servidor local do PHP ou configure em um servidor web
