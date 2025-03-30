@@ -1,71 +1,55 @@
-###################
-What is CodeIgniter
-###################
+SGE - Sistema de Gestão para Estacionamentos
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+O SGE (Sistema de Gestão para Estacionamentos) é uma solução abrangente projetada para atender às necessidades específicas de empresas de estacionamento. Com diversas funcionalidades integradas, o sistema permite um controle eficiente e centralizado das informações essenciais para a gestão de um estacionamento.
 
-*******************
-Release Information
-*******************
+✨ Funcionalidades
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+	- Gestão Financeira: Controle de valores a receber dos mensalistas e tickets avulsos, incluindo status de pagamento.
+	
+	- Controle de Vagas: Visualização em tempo real do total de vagas ocupadas e livres, categorizadas.
+	
+	- Gerenciamento de Entradas e Saídas: Cadastro, visualização, encerramento, exclusão e impressão de tickets.
+	
+	- Gestão de Mensalistas e Usuários: Cadastro, edição e remoção de mensalistas, mensalidades e usuários.
+	
+	- Precificação Flexível: Configuração personalizada das tarifas do estacionamento.
+	
+	- Cadastro de Formas de Pagamento: Opções configuráveis para o fechamento de tickets.
+	
+	- Central de Notificações: Alertas e avisos integrados ao sistema.
+	
+	- Tratamento de Erros e Restrições: Garantia da integridade dos dados e prevenção de inconsistências.
 
-**************************
-Changelog and New Features
-**************************
+📝 Restrições e Validações
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+O sistema impede a exclusão ou desativação de registros essenciais, como:
 
-*******************
-Server Requirements
-*******************
+	- Mensalistas e mensalidades ativas
+	- Tickets e pagamentos em aberto
+	- Usuários administradores
+	- Categorias e formas de pagamento vinculadas a registros ativos
 
-PHP version 5.6 or newer is recommended.
+🛠️ Tecnologias Utilizadas
 
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
+O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
-************
-Installation
-************
+	- Backend: PHP (CodeIgniter 3), SQL
+	- Frontend: HTML, CSS, JavaScript, Bootstrap
+	- Segurança e Autenticação: IonAuth
+	- Impressão do ticket: Dompdf
+	- Gerenciamento de Tempo: ThimeKit
 
-Please see the `installation section <https://codeigniter.com/userguide3/installation/index.html>`_
-of the CodeIgniter User Guide.
+🛡️ Instalação e Configuração
 
-*******
-License
-*******
+Clone o repositório:
 
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+git clone https://github.com/seu-usuario/SGE.git
 
-*********
-Resources
-*********
+Configure o banco de dados e as credenciais em application/config/database.php
 
--  `User Guide <https://codeigniter.com/docs>`_
--  `Contributing Guide <https://github.com/bcit-ci/CodeIgniter/blob/develop/contributing.md>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community Slack Channel <https://codeigniterchat.slack.com>`_
+Configure o ambiente em application/config/config.php
 
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
+Execute as migrações do banco de dados
 
-***************
-Acknowledgement
-***************
+Inicie o servidor local do PHP ou configure em um servidor web
 
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
